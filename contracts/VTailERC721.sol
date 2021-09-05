@@ -120,6 +120,14 @@ contract VTailERC721 is ERC721, ERC2981 {
     }
 
     /// @notice the base token URI
+    /// @return baseUri - the base URI
+    function setBaseTokenURI(string memory _baseUri) 
+        virtual 
+        public onlyOwner {
+        baseUri = _baseUri;
+    }
+
+    /// @notice the base token URI
     /// @param _tokenId - the interface id to check
     /// @return _tokenUri - the token  URI
     function tokenURI(uint256 _tokenId) 
