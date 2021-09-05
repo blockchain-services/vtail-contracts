@@ -2,6 +2,7 @@
 pragma solidity ^0.8.0;
 
 import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
+import "./Ownable.sol";
 
 /**
  * @title ERC20 contract for VTail.com
@@ -11,18 +12,7 @@ import "@openzeppelin/contracts/token/ERC20/extensions/ERC20Pausable.sol";
  * @dev see  [EIP-20: Basic token standard]. inherit from ERC20Pausable 
  * @dev to support pause/unpause
  */
-contract VTailERC20 is ERC20Pausable {
-
-    // the owner address. The owner can pause/unpause the contract
-    address private owner;
-
-    // added to methods that should only be called by the owner
-    modifier onlyOwner {
-        // only the owner shall pass
-        require(msg.sender == owner, 
-            "Only the owner can perform this action");
-        _;
-    }
+contract VTailERC20 is ERC20Pausable, Ownable {
     
     /**
     * @dev see  [EIP-20: Basic token standard]
@@ -32,9 +22,10 @@ contract VTailERC20 is ERC20Pausable {
         string memory name, 
         string memory symbol, 
         uint256 _totalSupply) ERC20(name, symbol) {
+        // the owner is a third-party address, not msg.sender
+        _setOwner(_owner);
         // mint the total supply to the owner
         _mint(_owner, _totalSupply);
-        owner = _owner;
     }
 
     /**
