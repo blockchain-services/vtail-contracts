@@ -6,6 +6,7 @@ import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./ERC2981.sol";
+import "hardhat/console.sol";
 
 contract OwnableDelegateProxy {}
 
@@ -18,7 +19,6 @@ contract ProxyRegistry {
  * @dev see  [EIP-20: Basic token standard]
  */
 contract VTailERC721 is ERC721, ERC2981, Ownable {
-
     // the base URI for URI calls
     string private _baseUri;
 
