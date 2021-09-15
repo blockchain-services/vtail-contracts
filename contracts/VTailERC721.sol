@@ -4,6 +4,7 @@ pragma solidity ^0.8.0;
 import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
+import "./Controllable.sol";
 
 import "./ERC2981.sol";
 import "hardhat/console.sol";
@@ -18,7 +19,7 @@ contract ProxyRegistry {
  * @title ERC721 contract for VTail.com
  * @dev see  [EIP-20: Basic token standard]
  */
-contract VTailERC721 is ERC721, ERC2981, Ownable {
+contract VTailERC721 is ERC721, ERC2981, Ownable, Controllable {
     // the base URI for URI calls
     string private _baseUri;
 

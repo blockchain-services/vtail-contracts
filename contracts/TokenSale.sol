@@ -30,7 +30,7 @@ contract TokenSale is ITokenSale, Controllable {
     /// @param _maxCount - the max quantity
     /// @param _vipReserve - the vip reserve to set aside for minting directly
     constructor(address _soldToken, uint256 _salePrice, uint256 _maxCount, uint256 _vipReserve) {
-        require(Controllable(_soldToken).isController(address(this)), "soldToken must be controllable by this contract");
+        // require(IControllable(_soldToken).isController(address(this)), "soldToken must be controllable by this contract");
         _addController(msg.sender);
         payee = msg.sender;
         soldToken = _soldToken;
@@ -54,7 +54,7 @@ contract TokenSale is ITokenSale, Controllable {
         require(salePrice_ * quantity <= msg.value, "must attach funds to purchase items");
         require(quantity > 0 && quantity <= 5, "cannot purchase more than 5 items");
         require(_openState, "cannot mint when tokensale is closed");
-
+        require(_mintees.length >= quantity, "Cannot purchase more than the available minter");
         // mint the desired tokens to the receiver
         mintings = new TokenMinting[](quantity);
         for(uint256 i = 0; i < quantity; i++) {
@@ -94,7 +94,7 @@ contract TokenSale is ITokenSale, Controllable {
         vipIssued = vipIssued + 1;
         issueCount = issueCount + 1;
         _mintees.push(TokenMinting(receiver, _createTokenHash()));
-        Mintable(soldToken).mint(receiver, tokenHash);
+        // Mintable(soldToken).mint(receiver, tokenHash);
     }
 
     /// @notice set the revenue partner on this tokensale. we split revenue with the partner
