@@ -19,11 +19,14 @@ describe("Token Sale Test Suite", function () {
 		tokenSale = await TokenSale.deploy(erc721.address, 50, 5000, 100);
 		await tokenSale.deployed();
 
-	});
-
-	it("It Should an allow account to purchase", async function () {
+		const a = await erc721.addController(tokenSale.address);
+		console.log(a);
 		//Set Token Sale status before purchasing/minting
 		await tokenSale.setOpenState(true);
+
+	});
+
+	it("It Should allow purchase", async function () {
 		await tokenSale.mint(minter.address, 1);
 
 		// Make sure to purchase not more than the available minter. 
@@ -35,16 +38,12 @@ describe("Token Sale Test Suite", function () {
 		expect(purchaserList[0].recipient).to.be.equal(purchaser.address);
 	})
 
-	it("It Should't an allow purchase more than the available minter", async function () {
-		//Set Token Sale status before purchasing/minting
-		await tokenSale.setOpenState(true);
+	it("It Should't allow purchase more than the available minter", async function () {
 		await tokenSale.mint(minter.address, 1);
 
-		// Make sure to purchase not more than the available minter. 
+		// Trying to purchase more qty than the available minter. 
 		await expect(tokenSale.purchase(purchaser.address, 2, {
 			value: ethers.utils.parseEther('1')
 		})).to.be.revertedWith("Cannot purchase more than the available minter");
-
-
 	})
 })
