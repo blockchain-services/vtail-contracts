@@ -19,8 +19,6 @@ describe("Token Sale Test Suite", function () {
 		tokenSale = await TokenSale.deploy(erc721.address, 50, 5000, 100);
 		await tokenSale.deployed();
 
-		const a = await erc721.addController(tokenSale.address);
-		console.log(a);
 		//Set Token Sale status before purchasing/minting
 		await tokenSale.setOpenState(true);
 

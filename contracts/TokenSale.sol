@@ -30,6 +30,7 @@ contract TokenSale is ITokenSale, Controllable {
     /// @param _maxCount - the max quantity
     /// @param _vipReserve - the vip reserve to set aside for minting directly
     constructor(address _soldToken, uint256 _salePrice, uint256 _maxCount, uint256 _vipReserve) {
+        IControllable(_soldToken).addController(address(this));
         // require(IControllable(_soldToken).isController(address(this)), "soldToken must be controllable by this contract");
         _addController(msg.sender);
         payee = msg.sender;
