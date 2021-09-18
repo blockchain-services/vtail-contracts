@@ -1,4 +1,4 @@
-# Smart Contracts and Development environment for the NFTGem NFT Staking Protocol
+# Smart Contracts and Development environment for the VTail ERC721 NFT
 
 ## INSTALL
 
