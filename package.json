@@ -1,9 +1,9 @@
 {
-  "name": "nftgem-contracts",
+  "name": "vtail-contracts",
   "version": "0.1.0",
   "description": "",
-  "repository": "github:nftgem/nftgem-contracts",
-  "author": "sschepis",
+  "repository": "github:blockchain-services/vtail-contracts",
+  "author": "sschepis@gmail.com",
   "license": "MIT",
   "keywords": [
     "ethereum",
