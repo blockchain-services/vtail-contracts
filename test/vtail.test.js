@@ -23,8 +23,8 @@ function getTransactionEvent(contract, receipt, event) {
   return;
 }
 
-describe("Greeter", function () {
-  it("Should return the new greeting once it's changed", async function () {
+describe("VTail", function () {
+  it("Should conduct a successful token sale", async function () {
     const [owner, receiver] = await ethers.getSigners();
     const ownerAddress = await owner.getAddress();
     const receiverAddress = await receiver.getAddress();
