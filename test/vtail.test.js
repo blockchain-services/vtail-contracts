@@ -108,6 +108,8 @@ describe("VTail", function () {
     // Set an address as the a partner
     await tokenSale.setRevenuePartner(partnerAddress, 50);
     const partner = await tokenSale.getRevenuePartner();
+
+    //New partner should be changed
     expect(partner.partner).to.be.equal(partnerAddress);
     expect(partner.permill.toNumber()).to.be.equal(50);
   })
