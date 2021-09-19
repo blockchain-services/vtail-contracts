@@ -24,14 +24,23 @@ function getTransactionEvent(contract, receipt, event) {
 }
 
 describe("VTail", function () {
-  it("Should conduct a successful token sale", async function () {
-    const [owner, receiver] = await ethers.getSigners();
-    const ownerAddress = await owner.getAddress();
-    const receiverAddress = await receiver.getAddress();
+  let tokenSale;
+  let receiverAddress;
+  let ownerAddress;
+  let vtailERC721;
+  let newPayeeAddress;
+  let partnerAddress;
+
+  beforeEach(async () => {
+    const [owner, receiver, newPayee, partner] = await ethers.getSigners();
+    ownerAddress = await owner.getAddress();
+    receiverAddress = await receiver.getAddress();
+    newPayeeAddress = await newPayee.getAddress();
+    partnerAddress = await newPayee.getAddress();
 
     // deploy NFT
     const VTailERC721 = await ethers.getContractFactory("VTailERC721");
-    const vtailERC721 = await VTailERC721.deploy(
+    vtailERC721 = await VTailERC721.deploy(
       "The NFT",
       "NFTT",
       9999,
@@ -41,7 +50,7 @@ describe("VTail", function () {
 
     // deploy token sale
     const TokenSale = await ethers.getContractFactory("TokenSale");
-    const tokenSale = await TokenSale.deploy(
+    tokenSale = await TokenSale.deploy(
       vtailERC721.address,
       ethers.utils.parseEther("1"),
       9999,
@@ -57,7 +66,9 @@ describe("VTail", function () {
 
     // init the contract
     await tokenSale.setOpenState(true);
+  });
 
+  it("Should conduct a successful token sale", async function () {
     // purchase an NFT to receiver (attaching 1 ETH as payment)
     const tokenMinting = await tokenSale.purchase(receiverAddress, 1, {
       value: ethers.utils.parseEther("1"),
@@ -75,4 +86,29 @@ describe("VTail", function () {
     const ownerOf = await vtailERC721.owns(receiverAddress, [pVal]);
     expect(ownerOf[0]).to.be.true;
   });
+
+  it("Should be able to set new payee", async function () {
+    // Set an address as a new payee
+    await tokenSale.setPayee(newPayeeAddress);
+    const payee = await tokenSale.getPayee();
+
+    //Check new payee is already set anew.
+    expect(payee).to.be.equal(newPayeeAddress);
+  });
+
+  it("Should be able to set new sale price", async function () {
+    // Set a new sale price
+    await tokenSale.setSalePrice(500);
+    const price = await tokenSale.getSalePrice();
+    // Check sale price is already updated or not.
+    expect(price.toNumber()).to.be.equal(500);
+  });
+
+  it("Should be able to set revenue partner and it's share", async function () {
+    // Set an address as the a partner
+    await tokenSale.setRevenuePartner(partnerAddress, 50);
+    const partner = await tokenSale.getRevenuePartner();
+    expect(partner.partner).to.be.equal(partnerAddress);
+    expect(partner.permill.toNumber()).to.be.equal(50);
+  })
 });
