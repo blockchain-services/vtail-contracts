@@ -1,4 +1,4 @@
-# Smart Contracts and Development environment for the Radius NFT protocol
+# Smart Contracts and Development environment for the erc721 token sale
 
 ## INSTALL
 
