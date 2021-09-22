@@ -1,0 +1,3 @@
+[submodule "quantized-ui"]
+	path = quantized-ui
+	url = http://github.com/quantized-finance/quantized-ui
