@@ -2,6 +2,10 @@
 
 ## INSTALL
 
+Deployed contract ABIs and addresses can be found in the `deployments` folder and also in the root of the project in the `kovan.json` and `ropsten.json` files.
+
+## INSTALL
+
 ```bash
 yarn
 ```
