@@ -1,4 +1,8 @@
-# Smart Contracts and Development environment for the VTail tokensale.
+# Smart Contracts and Development environment for the erc721 token sale
+
+## INSTALL
+
+Deployed contract ABIs and addresses can be found in the `deployments` folder and also in the root of the project in the `kovan.json` , `ropsten.json` `rinkeby.json` files.
 
 ## INSTALL
 
@@ -28,6 +32,11 @@ npx hardhat --network <network> <command> --<argname> <argvalue>
 `set-sale-price` `price` - set sale price in satoshi
 `get-sale-price` - get sale price in satoshi
 `get-sale-token` - get address of the 721 token being sold
+`purchase` `quantity` - purchase a quantity of the 721
+`mint` `receiver` `hash` - mint a token to receiver with given hash
+`get-minter-list` - get the list of all receivers of a mint
+`get-purchaser-list` - get the list of all purchasers of the tokensale
+`add-controller` `address` - add a controller to the tokensale
 
 ## Github Setup
 

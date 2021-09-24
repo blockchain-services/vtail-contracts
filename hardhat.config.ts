@@ -286,6 +286,23 @@ task('get-purchaser-list', 'get the purchaser list for the token sale')
   }
 );
 
+task('add-controller', 'add a controller to the token sale')
+  .addParam('address', 'The controller address')
+  .setAction(
+  async ({address}, hre: HardhatRuntimeEnvironment) => {
+    const [sender] = await hre.ethers.getSigners();
+    const tokenSale = await hre.ethers.getContractAt(
+      'TokenSale',
+      (
+        await hre.deployments.get('TokenSale')
+      ).address,
+      sender
+    );
+    const tx = await tokenSale.addController(address);
+    await tx.wait();
+  }
+);
+
 
 const config: HardhatUserConfig = {
   solidity: {
