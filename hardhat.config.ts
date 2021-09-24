@@ -143,7 +143,7 @@ task('get-sale-price', 'get the sale price of the token sale')
       ).address,
       sender
     );
-    const tx = await tokenSale.salePrice();
+    const tx = await tokenSale.getSalePrice();
     console.log({
       salePrice: tx.toHexString(),
     });
@@ -171,9 +171,10 @@ task('get-sale-token', 'get the sale token address')
 
 // purchase one or more items from the token sale
 task('purchase', 'purchase one or more items from the token sale')
+  .addParam('receiver', 'The address of the receiver')
   .addParam('quantity', 'The quantity to purchase')
   .setAction(
-  async ({quantity}, hre: HardhatRuntimeEnvironment) => {
+  async ({receiver, quantity}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -184,8 +185,8 @@ task('purchase', 'purchase one or more items from the token sale')
     );
     // look up the sale token price then call purchase
     // with the correct value for the quantity
-    const sp = await tokenSale.salePrice();
-    const tx = await tokenSale.purchase(quantity, {
+    const sp = await tokenSale.getSalePrice();
+    const tx = await tokenSale.purchase(receiver, quantity, {
       value: sp.mul(quantity)
     });
     await tx.wait();
@@ -298,7 +299,7 @@ task('add-controller', 'add a controller to the token sale')
       ).address,
       sender
     );
-    const tx = await tokenSale.addController(address);
+    const tx = await tokenSale.addControllers(address);
     await tx.wait();
   }
 );

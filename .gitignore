@@ -21,3 +21,5 @@ deployments/localhost
 types/
 .openzeppelin/
 types/
+.epdata
+yarn-error.log
