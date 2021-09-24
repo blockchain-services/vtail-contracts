@@ -1,4 +1,4 @@
-# Smart Contracts and Development environment for the Radius NFT protocol
+# Smart Contracts and Development environment for the VTail tokensale.
 
 ## INSTALL
 
@@ -13,6 +13,21 @@ make a copy of `.env.sample` to `.env` and fill in the requisite information
 ```bash
 yarn test
 ```
+## CONTROLLING THE TOKENSALE
+
+```bash
+npx hardhat --network <network> <command> --<argname> <argvalue>
+```
+
+### Available commands
+
+`open-tokensale` - open the tokensale (make it available to the public)
+`close-tokensale` - open the tokensale (make it available to the public)
+`set-revenue-partner` `address` `cut` - set the revenue partner
+`get-revenue-partner` - get the revenue partner
+`set-sale-price` `price` - set sale price in satoshi
+`get-sale-price` - get sale price in satoshi
+`get-sale-token` - get address of the 721 token being sold
 
 ## Github Setup
 
