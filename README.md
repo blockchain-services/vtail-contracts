@@ -25,18 +25,18 @@ npx hardhat --network <network> <command> --<argname> <argvalue>
 
 ### Available commands
 
-`open-tokensale` - open the tokensale (make it available to the public) 
-`close-tokensale` - open the tokensale (make it available to the public) 
-`set-revenue-partner` `address` `cut` - set the revenue partner 
-`get-revenue-partner` - get the revenue partner 
-`set-sale-price` `price` - set sale price in satoshi 
-`get-sale-price` - get sale price in satoshi 
-`get-sale-token` - get address of the 721 token being sold 
-`purchase` `quantity` - purchase a quantity of the 721 
-`mint` `receiver` `hash` - mint a token to receiver with given hash 
-`get-minter-list` - get the list of all receivers of a mint 
-`get-purchaser-list` - get the list of all purchasers of the tokensale 
-`add-controller` `address` - add a controller to the tokensale 
+`open-tokensale` - open the tokensale (make it available to the public)  
+`close-tokensale` - open the tokensale (make it available to the public)  
+`set-revenue-partner` `address` `cut` - set the revenue partner  
+`get-revenue-partner` - get the revenue partner  
+`set-sale-price` `price` - set sale price in satoshi  
+`get-sale-price` - get sale price in satoshi  
+`get-sale-token` - get address of the 721 token being sold  
+`purchase` `quantity` - purchase a quantity of the 721  
+`mint` `receiver` `hash` - mint a token to receiver with given hash  
+`get-minter-list` - get the list of all receivers of a mint  
+`get-purchaser-list` - get the list of all purchasers of the tokensale  
+`add-controller` `address` - add a controller to the tokensale  
 
 ## Github Setup
 
