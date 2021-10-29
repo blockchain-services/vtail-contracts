@@ -9,6 +9,8 @@ import "./ERC2981.sol";
 import "./ITokenSale.sol";
 import "./IVTailERC721.sol";
 
+import "@imtbl/imx-contracts/contracts/Mintable.sol";
+
 contract OwnableDelegateProxy {}
 
 contract ProxyRegistry {
@@ -19,7 +21,7 @@ contract ProxyRegistry {
  * @title ERC721 contract for VTail.com
  * @dev see  [EIP-20: Basic token standard]
  */
-contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable {
+contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
 
     // the base URI for URI calls
     string private _baseUri;
@@ -51,11 +53,13 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable {
      * @param _mintingMax the total number of tokens  to be minted
      * @param _uri the base uri for the token
      */
-    constructor( 
-        string memory name, 
-        string memory symbol, 
-        uint256 _mintingMax, 
-        string memory _uri) ERC721(name, symbol) {
+    constructor(
+        string memory name,
+        string memory symbol,
+        uint256 _mintingMax,
+        string memory _uri,
+        address _owner,
+        address imx) ERC721(name, symbol) Mintable(_owner, imx) {
             // set the minter and mintinx max
             mintingMax = _mintingMax;
             _baseUri = _uri;
@@ -102,20 +106,33 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable {
         _mint(receiver, tokenHash);
     }
 
+    /**
+     * @dev _mintFor - immutable x minting
+     * @param to the address of the mintee
+      * @param id the tokenHash to mint them
+     */
+    function _mintFor(
+        address to,
+        uint256 id,
+        bytes memory
+    ) internal override {
+        _mint(to, id);
+    }
+
     /// @notice ERC165 interface responder for this contract
     /// @param interfaceId - the interface id to check
     /// @return supportsIface - whether the interface is supported
-    function supportsInterface(bytes4 interfaceId) 
-        public 
-        view 
-        virtual 
+    function supportsInterface(bytes4 interfaceId)
+        public
+        view
+        virtual
         override(ERC2981, ERC721, IERC165) returns (bool supportsIface) {
-        supportsIface = interfaceId == type(IERC2981).interfaceId 
+        supportsIface = interfaceId == type(IERC2981).interfaceId
         || super.supportsInterface(interfaceId);
     }
 
     /**
-     * Override isApprovedForAll to whitelist user's OpenSea proxy accounts 
+     * Override isApprovedForAll to whitelist user's OpenSea proxy accounts
      * to enable gas-less listings.
      */
     function isApprovedForAll(address owner, address operator)
@@ -136,28 +153,28 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable {
 
     /// @notice the base token URI
     /// @return baseUri - the base URI
-    function baseTokenURI() 
-        external override 
+    function baseTokenURI()
+        external override
         view returns (string memory baseUri) {
         baseUri = _baseUri;
     }
 
     /// @notice the base token URI
-    function setBaseTokenURI(string memory _baseU) 
+    function setBaseTokenURI(string memory _baseU)
         external override onlyOwner {
         _baseUri = _baseU;
     }
 
     /// @notice the base token URI
     /// @return baseUri - the base URI
-    function proxyRegistryAddress() 
+    function proxyRegistryAddress()
         external override
         view returns (address) {
-        return _proxyRegistryAddress; 
+        return _proxyRegistryAddress;
     }
 
     /// @notice the base token URI
-    function setProxyRegistryAddress(address valu) 
+    function setProxyRegistryAddress(address valu)
         external override onlyOwner {
         _proxyRegistryAddress = valu;
     }
@@ -165,9 +182,9 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable {
     /// @notice the base token URI
     /// @param _tokenId - the interface id to check
     /// @return _tokenUri - the token  URI
-    function tokenURI(uint256 _tokenId) 
-        override 
-        public 
+    function tokenURI(uint256 _tokenId)
+        override
+        public
         view returns (string memory _tokenUri) {
         _tokenUri = string(
             abi.encodePacked(_baseUri, Strings.toString(_tokenId))

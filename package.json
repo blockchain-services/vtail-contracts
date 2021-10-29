@@ -97,6 +97,7 @@
     "mainnet:run": "cross-env HARDHAT_NETWORK=mainnet ts-node --files"
   },
   "dependencies": {
+    "@imtbl/imx-contracts": "^1.0.0",
     "@nomiclabs/hardhat-etherscan": "^2.1.6",
     "@openzeppelin/contracts": "^4.3.2",
     "@uniswap/sdk": "^3.0.3"

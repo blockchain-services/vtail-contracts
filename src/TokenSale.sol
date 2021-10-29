@@ -9,21 +9,21 @@ import "./ITokenSale.sol";
 /// tokensale implementation
 contract TokenSale is ITokenSale, Controllable, Initializable {
 
-    address payee;
-    address soldToken;
-    uint256 salePrice_;
-    uint256 issueCount;
-    uint256 maxCount;
-    uint256 vipReserve;
-    uint256 vipIssued;
+    address private payee;
+    address private soldToken;
+    uint256 private salePrice_;
+    uint256 private issueCount;
+    uint256 private maxCount;
+    uint256 private vipReserve;
+    uint256 private vipIssued;
 
-    TokenMinting[] _purchasers;
-    TokenMinting[] _mintees;
+    TokenMinting[] private _purchasers;
+    TokenMinting[] private _mintees;
 
-    address _partner;
-    uint256 _permill;
+    address private _partner;
+    uint256 private _permill;
 
-    bool _openState;
+    bool private _openState;
 
     /// @notice Called to purchase some quantity of a token
     /// @param _soldToken - the erc721 address
@@ -40,11 +40,12 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         maxCount = _maxCount;
         vipReserve = _vipReserve;
         vipIssued = 0;
+
     }
 
     /// @dev called after constructor once to init stuff
     function initialize(address partner, uint256 permill) public initializer {
-        require(IMintable(soldToken).getMinter() == address(this), "soldToken must be controllable by this contract");
+        require(IMintableToken(soldToken).getMinter() == address(this), "soldToken must be controllable by this contract");
         _partner = partner;
         _permill = permill;
     }
@@ -56,8 +57,9 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
 
     /// @notice Called to purchase some quantity of a token
     /// @param receiver - the address of the account receiving the item
-    /// @param quantity - the quantity to purchase. max 5. 
+    /// @param quantity - the quantity to purchase. max 5.
     function purchase(address receiver, uint256 quantity) external payable override returns (TokenMinting[] memory mintings) {
+
         require(issueCount + quantity + vipReserve <= maxCount, "cannot purchase more than maxCount");
         require(salePrice_ * quantity <= msg.value, "must attach funds to purchase items");
         require(quantity > 0 && quantity <= 5, "cannot purchase more than 5 items");
@@ -73,7 +75,7 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
             mintings[i] = _minting;
             issueCount = issueCount + 1;
             // mint the token
-            IMintable(soldToken).mint(receiver, _minting.tokenHash);
+            // IMintable(soldToken).mint(receiver, _minting.tokenHash);
             // emit an event to that respect
             emit TokenSold(receiver, _minting.tokenHash);
         }
@@ -84,12 +86,12 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
             partnerShare = msg.value * _permill / 1000000;
             payable(_partner).transfer(partnerShare);
         }
-        uint256 ourShare = msg.value - partnerShare; 
+        uint256 ourShare = msg.value - partnerShare;
         payable(payee).transfer(ourShare);
     }
 
     /// @notice returns the sale price in ETH for the given quantity.
-    /// @param quantity - the quantity to purchase. max 5. 
+    /// @param quantity - the quantity to purchase. max 5.
     /// @return price - the sale price for the given quantity
     function salePrice(uint256 quantity) external view override returns (uint256 price) {
         price = salePrice_ * quantity;
@@ -105,7 +107,7 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         vipIssued = vipIssued + 1;
         issueCount = issueCount + 1;
         _mintees.push(TokenMinting(receiver, _createTokenHash()));
-        IMintable(soldToken).mint(receiver, tokenHash);
+        IMintableToken(soldToken).mint(receiver, tokenHash);
     }
 
     /// @notice set the revenue partner on this tokensale. we split revenue with the partner

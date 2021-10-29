@@ -23,6 +23,21 @@ import '@nomiclabs/hardhat-ethers';
 import '@nomiclabs/hardhat-etherscan';
 
 import {node_url, accounts} from './utils/network';
+import { BigNumber } from '@ethersproject/bignumber';
+
+task('listaccounts', 'list the first three accounts').setAction(
+  async ({}, hre: HardhatRuntimeEnvironment) => {
+    let signers: any = await hre.ethers.getSigners();
+    let provider = await hre.ethers.provider;
+    signers = await Promise.all(signers.map((signer: any) => signer.getAddress()));
+    let balances: {[x:string]:any} = await Promise.all(signers.map((signer:any) => provider.getBalance(signer)));
+    signers.forEach((signer: any, idx: any) =>
+      console.log(
+        signer, hre.ethers.utils.formatEther(balances[idx].toString()),
+      )
+    );
+  }
+);
 
 // open the tokensale. Once the tokensale is open, anyone can buy tokens
 task('open-tokensale', 'open the tokensale').setAction(
@@ -56,30 +71,32 @@ task('close-tokensale', 'close the tokensale').setAction(
   }
 );
 
-task('get-tokensale-openstate', 'get the open/close state of the tokensale').setAction(
-  async ({}, hre: HardhatRuntimeEnvironment) => {
-    const [sender] = await hre.ethers.getSigners();
-    const tokenSale = await hre.ethers.getContractAt(
-      'TokenSale',
-      (
-        await hre.deployments.get('TokenSale')
-      ).address,
-      sender
-    );
-    const tx = await tokenSale.getOpenState();
-    console.log({
-      openSatate: tx
-    })
-  }
-);
-
+task(
+  'get-tokensale-openstate',
+  'get the open/close state of the tokensale'
+).setAction(async ({}, hre: HardhatRuntimeEnvironment) => {
+  const [sender] = await hre.ethers.getSigners();
+  const tokenSale = await hre.ethers.getContractAt(
+    'TokenSale',
+    (
+      await hre.deployments.get('TokenSale')
+    ).address,
+    sender
+  );
+  const tx = await tokenSale.getOpenState();
+  console.log({
+    openSatate: tx,
+  });
+});
 
 // set the revenue partner address and the percentage of their revenue share
 task('set-revenue-partner', 'set the revenue partner address and permil cut')
   .addParam('address', 'The revenue partner address')
-  .addParam('cut', 'Their permillion cut of revenue (1000 permillion = 1 percent)')
-  .setAction(
-  async ({address, cut}, hre: HardhatRuntimeEnvironment) => {
+  .addParam(
+    'cut',
+    'Their permillion cut of revenue (1000 permillion = 1 percent)'
+  )
+  .setAction(async ({address, cut}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -90,34 +107,35 @@ task('set-revenue-partner', 'set the revenue partner address and permil cut')
     );
     const tx = await tokenSale.setRevenuePartner(address, cut);
     await tx.wait();
-  }
-);
+  });
 
 // set the revenue partner address and the percentage of their revenue share
-task('get-revenue-partner', 'get the revenue partner address and permil cut')
-  .setAction(
-  async ({}, hre: HardhatRuntimeEnvironment) => {
-    const [sender] = await hre.ethers.getSigners();
-    const tokenSale = await hre.ethers.getContractAt(
-      'TokenSale',
-      (
-        await hre.deployments.get('TokenSale')
-      ).address,
-      sender
-    );
-    const tx = await tokenSale.getRevenuePartner();
-    console.log({
-      address: tx[0],
-      cut: tx[1]
-    });
-  }
-);
+task(
+  'get-revenue-partner',
+  'get the revenue partner address and permil cut'
+).setAction(async ({}, hre: HardhatRuntimeEnvironment) => {
+  const [sender] = await hre.ethers.getSigners();
+  const tokenSale = await hre.ethers.getContractAt(
+    'TokenSale',
+    (
+      await hre.deployments.get('TokenSale')
+    ).address,
+    sender
+  );
+  const tx = await tokenSale.getRevenuePartner();
+  console.log({
+    address: tx[0],
+    cut: tx[1],
+  });
+});
 
 // set the sale price for the token sale
 task('set-sale-price', 'set the sale price of the token sale')
-  .addParam('price', 'The price in satoshi (1000000000000000000 satoshi equals one ether)')
-  .setAction(
-  async ({price}, hre: HardhatRuntimeEnvironment) => {
+  .addParam(
+    'price',
+    'The price in satoshi (1000000000000000000 satoshi equals one ether)'
+  )
+  .setAction(async ({price}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -128,12 +146,10 @@ task('set-sale-price', 'set the sale price of the token sale')
     );
     const tx = await tokenSale.setSalePrice(price);
     await tx.wait();
-  }
-);
+  });
 
 // set the revenue partner address and the percentage of their revenue share
-task('get-sale-price', 'get the sale price of the token sale')
-  .setAction(
+task('get-sale-price', 'get the sale price of the token sale').setAction(
   async ({}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
@@ -151,8 +167,7 @@ task('get-sale-price', 'get the sale price of the token sale')
 );
 
 // set the revenue partner address and the percentage of their revenue share
-task('get-sale-token', 'get the sale token address')
-  .setAction(
+task('get-sale-token', 'get the sale token address').setAction(
   async ({}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
@@ -173,8 +188,7 @@ task('get-sale-token', 'get the sale token address')
 task('purchase', 'purchase one or more items from the token sale')
   .addParam('receiver', 'The address of the receiver')
   .addParam('quantity', 'The quantity to purchase')
-  .setAction(
-  async ({receiver, quantity}, hre: HardhatRuntimeEnvironment) => {
+  .setAction(async ({receiver, quantity}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -187,18 +201,16 @@ task('purchase', 'purchase one or more items from the token sale')
     // with the correct value for the quantity
     const sp = await tokenSale.getSalePrice();
     const tx = await tokenSale.purchase(receiver, quantity, {
-      value: sp.mul(quantity)
+      value: sp.mul(quantity),
     });
     await tx.wait();
-  }
-);
+  });
 
 // purchase one or more items from the token sale
 task('mint', 'mint a token with a specific hash to a receiving address')
   .addParam('receiver', 'The address of the receiver of the mint')
   .addParam('hash', 'The hash of the token to mint')
-  .setAction(
-  async ({receiver, hash}, hre: HardhatRuntimeEnvironment) => {
+  .setAction(async ({receiver, hash}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -210,13 +222,11 @@ task('mint', 'mint a token with a specific hash to a receiving address')
     // call mint to mint a token with a specific hash
     const tx = await tokenSale.mint(receiver, hash);
     await tx.wait();
-  }
-);
+  });
 
 task('set-payee', 'set the payee for the token sale')
   .addParam('address', 'The payee address for the token sale')
-  .setAction(
-  async ({address}, hre: HardhatRuntimeEnvironment) => {
+  .setAction(async ({address}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -227,12 +237,10 @@ task('set-payee', 'set the payee for the token sale')
     );
     const tx = await tokenSale.setPayee(address);
     await tx.wait();
-  }
-);
+  });
 
 // get the payee for the token sale
-task('get-payee', 'get the payee for the token sale')
-  .setAction(
+task('get-payee', 'get the payee for the token sale').setAction(
   async ({}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
@@ -244,14 +252,13 @@ task('get-payee', 'get the payee for the token sale')
     );
     const tx = await tokenSale.getPayee();
     console.log({
-      address: tx
+      address: tx,
     });
   }
 );
 
 // get the payee for the token sale
-task('get-minter-list', 'get the minter list for the token sale')
-  .setAction(
+task('get-minter-list', 'get the minter list for the token sale').setAction(
   async ({}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
@@ -263,34 +270,33 @@ task('get-minter-list', 'get the minter list for the token sale')
     );
     const tx = await tokenSale.minterList();
     console.log({
-      minters: tx
+      minters: tx,
     });
   }
 );
 
 // get the payee for the token sale
-task('get-purchaser-list', 'get the purchaser list for the token sale')
-  .setAction(
-  async ({}, hre: HardhatRuntimeEnvironment) => {
-    const [sender] = await hre.ethers.getSigners();
-    const tokenSale = await hre.ethers.getContractAt(
-      'TokenSale',
-      (
-        await hre.deployments.get('TokenSale')
-      ).address,
-      sender
-    );
-    const tx = await tokenSale.purchaserList();
-    console.log({
-      purchasers: tx
-    });
-  }
-);
+task(
+  'get-purchaser-list',
+  'get the purchaser list for the token sale'
+).setAction(async ({}, hre: HardhatRuntimeEnvironment) => {
+  const [sender] = await hre.ethers.getSigners();
+  const tokenSale = await hre.ethers.getContractAt(
+    'TokenSale',
+    (
+      await hre.deployments.get('TokenSale')
+    ).address,
+    sender
+  );
+  const tx = await tokenSale.purchaserList();
+  console.log({
+    purchasers: tx,
+  });
+});
 
 task('add-controller', 'add a controller to the token sale')
   .addParam('address', 'The controller address')
-  .setAction(
-  async ({address}, hre: HardhatRuntimeEnvironment) => {
+  .setAction(async ({address}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
     const tokenSale = await hre.ethers.getContractAt(
       'TokenSale',
@@ -299,17 +305,30 @@ task('add-controller', 'add a controller to the token sale')
       ).address,
       sender
     );
-    const tx = await tokenSale.addControllers(address);
+    const tx = await tokenSale.addController(address);
     await tx.wait();
-  }
-);
+  });
 
+  task('set-base-url', 'set the base URL of the erc721 contract')
+  .addParam('url', 'The base url')
+  .setAction(async ({url}, hre: HardhatRuntimeEnvironment) => {
+    const [sender] = await hre.ethers.getSigners();
+    const tokenSale = await hre.ethers.getContractAt(
+      'VTailERC721',
+      (
+        await hre.deployments.get('VTailERC721')
+      ).address,
+      sender
+    );
+    const tx = await tokenSale.setBaseTokenURI(url);
+    await tx.wait();
+  });
 
 const config: HardhatUserConfig = {
   solidity: {
     compilers: [
       {
-        version: '0.8.0',
+        version: '0.8.4',
         settings: {
           optimizer: {
             enabled: true,

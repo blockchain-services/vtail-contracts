@@ -1,9 +1,9 @@
 {
-  "name": "ropsten",
-  "chainId": "3",
+  "name": "rinkeby",
+  "chainId": "4",
   "contracts": {
     "VTailERC721": {
-      "address": "0xc5AFB9F659B149A20D2171daa1E45DA19Fc88ccD",
+      "address": "0x98cCd9cb27398a6595f15cbC4b63AC525b942aad",
       "abi": [
         {
           "inputs": [
@@ -26,16 +26,6 @@
               "internalType": "string",
               "name": "_uri",
               "type": "string"
-            },
-            {
-              "internalType": "address",
-              "name": "_owner",
-              "type": "address"
-            },
-            {
-              "internalType": "address",
-              "name": "imx",
-              "type": "address"
             }
           ],
           "stateMutability": "nonpayable",
@@ -89,31 +79,6 @@
             }
           ],
           "name": "ApprovalForAll",
-          "type": "event"
-        },
-        {
-          "anonymous": false,
-          "inputs": [
-            {
-              "indexed": false,
-              "internalType": "address",
-              "name": "to",
-              "type": "address"
-            },
-            {
-              "indexed": false,
-              "internalType": "uint256",
-              "name": "id",
-              "type": "uint256"
-            },
-            {
-              "indexed": false,
-              "internalType": "bytes",
-              "name": "blueprint",
-              "type": "bytes"
-            }
-          ],
-          "name": "AssetMinted",
           "type": "event"
         },
         {
@@ -240,25 +205,6 @@
           "inputs": [
             {
               "internalType": "uint256",
-              "name": "",
-              "type": "uint256"
-            }
-          ],
-          "name": "blueprints",
-          "outputs": [
-            {
-              "internalType": "bytes",
-              "name": "",
-              "type": "bytes"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "uint256",
               "name": "tokenId",
               "type": "uint256"
             }
@@ -307,19 +253,6 @@
           "type": "function"
         },
         {
-          "inputs": [],
-          "name": "imx",
-          "outputs": [
-            {
-              "internalType": "address",
-              "name": "",
-              "type": "address"
-            }
-          ],
-          "stateMutability": "view",
-          "type": "function"
-        },
-        {
           "inputs": [
             {
               "internalType": "address",
@@ -357,29 +290,6 @@
             }
           ],
           "name": "mint",
-          "outputs": [],
-          "stateMutability": "nonpayable",
-          "type": "function"
-        },
-        {
-          "inputs": [
-            {
-              "internalType": "address",
-              "name": "user",
-              "type": "address"
-            },
-            {
-              "internalType": "uint256",
-              "name": "quantity",
-              "type": "uint256"
-            },
-            {
-              "internalType": "bytes",
-              "name": "mintingBlob",
-              "type": "bytes"
-            }
-          ],
-          "name": "mintFor",
           "outputs": [],
           "stateMutability": "nonpayable",
           "type": "function"
@@ -755,7 +665,7 @@
       ]
     },
     "TokenSale": {
-      "address": "0x00ffE2dadbBD172e3EfE1a33FCa8dE77F11A472F",
+      "address": "0xD34a551B4a262230a373D376dDf8aADb2B0D49FD",
       "abi": [
         {
           "inputs": [

@@ -8,11 +8,11 @@ interface ITokenSale {
 
     /// @notice Called to purchase some quantity of a token
     /// @param receiver - the address of the account receiving the item
-    /// @param quantity - the quantity to purchase. max 5. 
+    /// @param quantity - the quantity to purchase. max 5.
     function purchase(address receiver, uint256 quantity) external payable returns (TokenMinting[] memory mintings);
 
     /// @notice returns the sale price in ETH for the given quantity.
-    /// @param quantity - the quantity to purchase. max 5. 
+    /// @param quantity - the quantity to purchase. max 5.
     /// @return price - the sale price for the given quantity
     function salePrice(uint256 quantity) external view returns (uint256 price);
 
@@ -59,7 +59,7 @@ interface ITokenSale {
     /// @notice get the primary token sale payee
     /// @return payee_ the token sale payee
     function getPayee() external view returns (address payee_);
-    
+
     /// @notice set the primary token sale payee
     /// @param _payee - the token sale payee
     function setPayee(address _payee) external;
@@ -82,7 +82,7 @@ interface ITokenSale {
     event RevenuePartnerChanged(address indexed partner, uint256 permill);
 }
 
-interface IMintable {
+interface IMintableToken {
     function mint(address receiver, uint256 tokenHash) external;
     function getMinter() external view returns (address);
 }
