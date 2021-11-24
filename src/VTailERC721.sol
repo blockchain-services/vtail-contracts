@@ -1,15 +1,13 @@
 //SPDX-License-Identifier: Unlicense
 pragma solidity ^0.8.0;
 
-import "@openzeppelin/contracts/token/ERC721/ERC721.sol";
+import "@openzeppelin/contracts/token/ERC721/extensions/ERC721Enumerable.sol";
 import "@openzeppelin/contracts/utils/Strings.sol";
 import "@openzeppelin/contracts/access/Ownable.sol";
 
 import "./ERC2981.sol";
 import "./ITokenSale.sol";
 import "./IVTailERC721.sol";
-
-import "@imtbl/imx-contracts/contracts/Mintable.sol";
 
 contract OwnableDelegateProxy {}
 
@@ -21,7 +19,7 @@ contract ProxyRegistry {
  * @title ERC721 contract for VTail.com
  * @dev see  [EIP-20: Basic token standard]
  */
-contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
+contract VTailERC721 is IVTailERC721, ERC721Enumerable, ERC2981, Ownable {
 
     // the base URI for URI calls
     string private _baseUri;
@@ -57,9 +55,7 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
         string memory name,
         string memory symbol,
         uint256 _mintingMax,
-        string memory _uri,
-        address _owner,
-        address imx) ERC721(name, symbol) Mintable(_owner, imx) {
+        string memory _uri) ERC721(name, symbol) {
             // set the minter and mintinx max
             mintingMax = _mintingMax;
             _baseUri = _uri;
@@ -104,19 +100,8 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
         nextIndexValue++;
         // mint the token
         _mint(receiver, tokenHash);
-    }
-
-    /**
-     * @dev _mintFor - immutable x minting
-     * @param to the address of the mintee
-      * @param id the tokenHash to mint them
-     */
-    function _mintFor(
-        address to,
-        uint256 id,
-        bytes memory
-    ) internal override {
-        _mint(to, id);
+        // emit an event to that respect
+        emit TokenMinted(receiver, tokenHash);
     }
 
     /// @notice ERC165 interface responder for this contract
@@ -126,7 +111,7 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
         public
         view
         virtual
-        override(ERC2981, ERC721, IERC165) returns (bool supportsIface) {
+        override(ERC2981, ERC721Enumerable, IERC165) returns (bool supportsIface) {
         supportsIface = interfaceId == type(IERC2981).interfaceId
         || super.supportsInterface(interfaceId);
     }
@@ -202,5 +187,12 @@ contract VTailERC721 is IVTailERC721, ERC721, ERC2981, Ownable, Mintable {
     // utility - return all token owners
     function allTokenHashes() external view override returns (uint256[] memory) {
         return tokenHashes;
+    }
+
+    function _beforeTokenTransfer(address from, address to, uint256 tokenId)
+        internal
+        override
+    {
+        super._beforeTokenTransfer(from, to, tokenId);
     }
 }

@@ -77,12 +77,11 @@ interface ITokenSale {
         uint256 tokenHash;
     }
 
-    event TokenSold(address indexed receiver, uint256 tokenHash);
     event PayeeChanged(address indexed receiver);
     event RevenuePartnerChanged(address indexed partner, uint256 permill);
 }
 
-interface IMintableToken {
+interface IMintable {
     function mint(address receiver, uint256 tokenHash) external;
     function getMinter() external view returns (address);
 }

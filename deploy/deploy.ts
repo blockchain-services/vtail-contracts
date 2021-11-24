@@ -45,9 +45,9 @@ export default async function func(hre: any) {
     log: true,
     args: [
       vtailERC721.address,
-      hre.ethers.utils.parseEther("0.1"),
+      hre.ethers.utils.parseEther("0.03"),
       9999,
-      25,
+      100,
     ]
   };
   const TokenSale = await deploy(
@@ -65,8 +65,11 @@ export default async function func(hre: any) {
   await tx.wait();
 
   // init the contract
-  console.log('initializing tokensale');
-  tx = await tokenSale.initialize(ownerAddress, 9999);
+  console.log('initializing tokensale revenue partner');
+  tx = await tokenSale.initialize(
+    ownerAddress, // TODO this is the revenue partner address
+    675000 // this is the revenue partner fee per million
+  );
   await tx.wait();
 
   console.log('setting to open');

@@ -40,12 +40,11 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         maxCount = _maxCount;
         vipReserve = _vipReserve;
         vipIssued = 0;
-
     }
 
     /// @dev called after constructor once to init stuff
     function initialize(address partner, uint256 permill) public initializer {
-        require(IMintableToken(soldToken).getMinter() == address(this), "soldToken must be controllable by this contract");
+        require(IMintable(soldToken).getMinter() == address(this), "soldToken must be controllable by this contract");
         _partner = partner;
         _permill = permill;
     }
@@ -59,7 +58,6 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
     /// @param receiver - the address of the account receiving the item
     /// @param quantity - the quantity to purchase. max 5.
     function purchase(address receiver, uint256 quantity) external payable override returns (TokenMinting[] memory mintings) {
-
         require(issueCount + quantity + vipReserve <= maxCount, "cannot purchase more than maxCount");
         require(salePrice_ * quantity <= msg.value, "must attach funds to purchase items");
         require(quantity > 0 && quantity <= 5, "cannot purchase more than 5 items");
@@ -75,9 +73,7 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
             mintings[i] = _minting;
             issueCount = issueCount + 1;
             // mint the token
-            // IMintable(soldToken).mint(receiver, _minting.tokenHash);
-            // emit an event to that respect
-            emit TokenSold(receiver, _minting.tokenHash);
+            IMintable(soldToken).mint(receiver, _minting.tokenHash);
         }
 
         uint256 partnerShare = 0;
@@ -107,7 +103,7 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         vipIssued = vipIssued + 1;
         issueCount = issueCount + 1;
         _mintees.push(TokenMinting(receiver, _createTokenHash()));
-        IMintableToken(soldToken).mint(receiver, tokenHash);
+        IMintable(soldToken).mint(receiver, tokenHash);
     }
 
     /// @notice set the revenue partner on this tokensale. we split revenue with the partner
