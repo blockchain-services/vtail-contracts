@@ -74,6 +74,8 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
             issueCount = issueCount + 1;
             // mint the token
             IMintable(soldToken).mint(receiver, _minting.tokenHash);
+            // emit an event to that respect
+            emit TokenMinted(receiver, _minting.tokenHash, 0);
         }
 
         uint256 partnerShare = 0;
@@ -104,6 +106,8 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         issueCount = issueCount + 1;
         _mintees.push(TokenMinting(receiver, _createTokenHash()));
         IMintable(soldToken).mint(receiver, tokenHash);
+        // emit an event to that respect
+        emit TokenMinted(receiver, tokenHash, 1);
     }
 
     /// @notice set the revenue partner on this tokensale. we split revenue with the partner

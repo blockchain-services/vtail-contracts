@@ -21,12 +21,10 @@ export default async function func(hre: any) {
     from: ownerAddress,
     log: true,
     args: [
-      "Scary Devils",
-      "DEVILS",
-      9999,
-      "https://scarydevils.nft/",
-      ownerAddress,
-      '0x4527be8f31e2ebfbef4fcaddb5a17447b27d2aef'
+      "The SD Test",
+      "SDT",
+      10000,
+      "http://demonft.vtail.com/wp-json/api/token/"
     ]
   };
   const VtailERC721 = await deploy(
@@ -46,7 +44,7 @@ export default async function func(hre: any) {
     args: [
       vtailERC721.address,
       hre.ethers.utils.parseEther("0.03"),
-      9999,
+      10000,
       100,
     ]
   };
