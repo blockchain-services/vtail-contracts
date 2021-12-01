@@ -100,8 +100,6 @@ contract VTailERC721 is IVTailERC721, ERC721Enumerable, ERC2981, Ownable {
         nextIndexValue++;
         // mint the token
         _mint(receiver, tokenHash);
-        // emit an event to that respect
-        emit TokenMinted(receiver, tokenHash);
     }
 
     /// @notice ERC165 interface responder for this contract
