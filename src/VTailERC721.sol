@@ -97,15 +97,13 @@ contract VTailERC721 is IVTailERC721, ERC721Enumerable, ERC2981, Ownable {
 
         // set the initial royalty receiver to the receiver of the token
         royaltyReceiversByHash[tokenHash] = receiver;
+        royaltyFeesByHash[tokenHash] = 7500;
+
         tokenHashes.push(tokenHash);
         nextIndexValue++;
 
         // mint the token
         _mint(receiver, tokenHash);
-
-        // emit an event to that respect
-        emit TokenMinted(receiver, tokenHash);
-
     }
 
     /// @notice ERC165 interface responder for this contract

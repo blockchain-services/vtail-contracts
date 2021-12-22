@@ -90,7 +90,7 @@ task(
 });
 
 // set the revenue partner address and the percentage of their revenue share
-task('set-revenue-partner', 'set the revenue partner address and permil cut')
+task('setrevenuepartner', 'set the revenue partner address and permil cut')
   .addParam('address', 'The revenue partner address')
   .addParam(
     'cut',
@@ -224,7 +224,7 @@ task('mint', 'mint a token with a specific hash to a receiving address')
     await tx.wait();
   });
 
-task('set-payee', 'set the payee for the token sale')
+task('setpayee', 'set the payee for the token sale')
   .addParam('address', 'The payee address for the token sale')
   .setAction(async ({address}, hre: HardhatRuntimeEnvironment) => {
     const [sender] = await hre.ethers.getSigners();
@@ -377,9 +377,9 @@ const config: HardhatUserConfig = {
     mainnet: {
       url: node_url('mainnet'),
       accounts: accounts('mainnet'),
-      gasPrice: 'auto',
-      gas: 'auto',
-      gasMultiplier: 1.5,
+      // gasPrice: 'auto',
+      // gas: 'auto',
+      // gasMultiplier: 2.5,
     },
     rinkeby: {
       url: node_url('rinkeby'),

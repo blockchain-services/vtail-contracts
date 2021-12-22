@@ -20,5 +20,4 @@ interface IVTailERC721 is IERC721, IMintable {
     function owns(address owner, uint256[] memory tokenIds) external view returns (bool[] memory);
     // utility - return all token owners
     function allTokenHashes() external view returns (uint256[] memory);
-    event TokenMinted(address indexed receiver, uint256 tokenHash);
 }

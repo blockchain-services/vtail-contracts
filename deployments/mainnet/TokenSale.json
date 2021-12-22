@@ -1,0 +1,791 @@
+{
+  "address": "0x1164d0F032D4dE5158816595e110C1471f0Ed644",
+  "abi": [
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_soldToken",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_salePrice",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_maxCount",
+          "type": "uint256"
+        },
+        {
+          "internalType": "uint256",
+          "name": "_vipReserve",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "nonpayable",
+      "type": "constructor"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "contractAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "controllerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "ControllerAdded",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "contractAddress",
+          "type": "address"
+        },
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "controllerAddress",
+          "type": "address"
+        }
+      ],
+      "name": "ControllerRemoved",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        }
+      ],
+      "name": "PayeeChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "partner",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "permill",
+          "type": "uint256"
+        }
+      ],
+      "name": "RevenuePartnerChanged",
+      "type": "event"
+    },
+    {
+      "anonymous": false,
+      "inputs": [
+        {
+          "indexed": true,
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "tokenHash",
+          "type": "uint256"
+        },
+        {
+          "indexed": false,
+          "internalType": "uint256",
+          "name": "mintType",
+          "type": "uint256"
+        }
+      ],
+      "name": "TokenMinted",
+      "type": "event"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_controller",
+          "type": "address"
+        }
+      ],
+      "name": "addController",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getOpenState",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "openState",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getPayee",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getRevenuePartner",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "partner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "permill",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getSalePrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "getSaleToken",
+      "outputs": [
+        {
+          "internalType": "address",
+          "name": "token",
+          "type": "address"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "partner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "permill",
+          "type": "uint256"
+        }
+      ],
+      "name": "initialize",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_address",
+          "type": "address"
+        }
+      ],
+      "name": "isController",
+      "outputs": [
+        {
+          "internalType": "bool",
+          "name": "allowed",
+          "type": "bool"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "tokenHash",
+          "type": "uint256"
+        }
+      ],
+      "name": "mint",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "minterList",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenHash",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ITokenSale.TokenMinting[]",
+          "name": "_list",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "receiver",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "quantity",
+          "type": "uint256"
+        }
+      ],
+      "name": "purchase",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenHash",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ITokenSale.TokenMinting[]",
+          "name": "mintings",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "payable",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "purchaserList",
+      "outputs": [
+        {
+          "components": [
+            {
+              "internalType": "address",
+              "name": "recipient",
+              "type": "address"
+            },
+            {
+              "internalType": "uint256",
+              "name": "tokenHash",
+              "type": "uint256"
+            }
+          ],
+          "internalType": "struct ITokenSale.TokenMinting[]",
+          "name": "_list",
+          "type": "tuple[]"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [],
+      "name": "relinquishControl",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "quantity",
+          "type": "uint256"
+        }
+      ],
+      "name": "salePrice",
+      "outputs": [
+        {
+          "internalType": "uint256",
+          "name": "price",
+          "type": "uint256"
+        }
+      ],
+      "stateMutability": "view",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "bool",
+          "name": "openState",
+          "type": "bool"
+        }
+      ],
+      "name": "setOpenState",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "_payee",
+          "type": "address"
+        }
+      ],
+      "name": "setPayee",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "address",
+          "name": "partner",
+          "type": "address"
+        },
+        {
+          "internalType": "uint256",
+          "name": "permill",
+          "type": "uint256"
+        }
+      ],
+      "name": "setRevenuePartner",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    },
+    {
+      "inputs": [
+        {
+          "internalType": "uint256",
+          "name": "_salePrice",
+          "type": "uint256"
+        }
+      ],
+      "name": "setSalePrice",
+      "outputs": [],
+      "stateMutability": "nonpayable",
+      "type": "function"
+    }
+  ],
+  "transactionHash": "0xe69695d63e822478fca63218c399b631be76c8a13a0422bb2ba88763fbb499e2",
+  "receipt": {
+    "to": null,
+    "from": "0x3bB6BA353CD4963445EaD2FaC7FFbB050a02D47A",
+    "contractAddress": "0x1164d0F032D4dE5158816595e110C1471f0Ed644",
+    "transactionIndex": 273,
+    "gasUsed": "1439691",
+    "logsBloom": "0x00000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000",
+    "blockHash": "0x34356437e69e1c235b3e043ac7a2170b38dded3e641af00d390213a3cdda1883",
+    "transactionHash": "0xe69695d63e822478fca63218c399b631be76c8a13a0422bb2ba88763fbb499e2",
+    "logs": [],
+    "blockNumber": 13730797,
+    "cumulativeGasUsed": "25522672",
+    "status": 1,
+    "byzantium": true
+  },
+  "args": [
+    "0xedC7044F6596Ca10865575AF2732146697B5E2b3",
+    "30000000000000000",
+    10000,
+    100
+  ],
+  "solcInputHash": "c5127deb3ea5cf9f500571c1e2407bf4",
+  "metadata": "{\"compiler\":{\"version\":\"0.8.4+commit.c7e474f2\"},\"language\":\"Solidity\",\"output\":{\"abi\":[{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_soldToken\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"_salePrice\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_maxCount\",\"type\":\"uint256\"},{\"internalType\":\"uint256\",\"name\":\"_vipReserve\",\"type\":\"uint256\"}],\"stateMutability\":\"nonpayable\",\"type\":\"constructor\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"controllerAddress\",\"type\":\"address\"}],\"name\":\"ControllerAdded\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"contractAddress\",\"type\":\"address\"},{\"indexed\":true,\"internalType\":\"address\",\"name\":\"controllerAddress\",\"type\":\"address\"}],\"name\":\"ControllerRemoved\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"}],\"name\":\"PayeeChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"partner\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"permill\",\"type\":\"uint256\"}],\"name\":\"RevenuePartnerChanged\",\"type\":\"event\"},{\"anonymous\":false,\"inputs\":[{\"indexed\":true,\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"tokenHash\",\"type\":\"uint256\"},{\"indexed\":false,\"internalType\":\"uint256\",\"name\":\"mintType\",\"type\":\"uint256\"}],\"name\":\"TokenMinted\",\"type\":\"event\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_controller\",\"type\":\"address\"}],\"name\":\"addController\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getOpenState\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"openState\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getPayee\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getRevenuePartner\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"partner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"permill\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getSalePrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"getSaleToken\",\"outputs\":[{\"internalType\":\"address\",\"name\":\"token\",\"type\":\"address\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"partner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"permill\",\"type\":\"uint256\"}],\"name\":\"initialize\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_address\",\"type\":\"address\"}],\"name\":\"isController\",\"outputs\":[{\"internalType\":\"bool\",\"name\":\"allowed\",\"type\":\"bool\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenHash\",\"type\":\"uint256\"}],\"name\":\"mint\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"minterList\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenHash\",\"type\":\"uint256\"}],\"internalType\":\"struct ITokenSale.TokenMinting[]\",\"name\":\"_list\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"receiver\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"quantity\",\"type\":\"uint256\"}],\"name\":\"purchase\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenHash\",\"type\":\"uint256\"}],\"internalType\":\"struct ITokenSale.TokenMinting[]\",\"name\":\"mintings\",\"type\":\"tuple[]\"}],\"stateMutability\":\"payable\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"purchaserList\",\"outputs\":[{\"components\":[{\"internalType\":\"address\",\"name\":\"recipient\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"tokenHash\",\"type\":\"uint256\"}],\"internalType\":\"struct ITokenSale.TokenMinting[]\",\"name\":\"_list\",\"type\":\"tuple[]\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[],\"name\":\"relinquishControl\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"quantity\",\"type\":\"uint256\"}],\"name\":\"salePrice\",\"outputs\":[{\"internalType\":\"uint256\",\"name\":\"price\",\"type\":\"uint256\"}],\"stateMutability\":\"view\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"bool\",\"name\":\"openState\",\"type\":\"bool\"}],\"name\":\"setOpenState\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"_payee\",\"type\":\"address\"}],\"name\":\"setPayee\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"address\",\"name\":\"partner\",\"type\":\"address\"},{\"internalType\":\"uint256\",\"name\":\"permill\",\"type\":\"uint256\"}],\"name\":\"setRevenuePartner\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"},{\"inputs\":[{\"internalType\":\"uint256\",\"name\":\"_salePrice\",\"type\":\"uint256\"}],\"name\":\"setSalePrice\",\"outputs\":[],\"stateMutability\":\"nonpayable\",\"type\":\"function\"}],\"devdoc\":{\"kind\":\"dev\",\"methods\":{\"addController(address)\":{\"details\":\"Add an address allowed to control this contract\"},\"constructor\":{\"params\":{\"_maxCount\":\"- the max quantity\",\"_salePrice\":\"- the sale price\",\"_soldToken\":\"- the erc721 address\",\"_vipReserve\":\"- the vip reserve to set aside for minting directly\"}},\"getOpenState()\":{\"returns\":{\"openState\":\"- the open state of the tokensale\"}},\"getPayee()\":{\"returns\":{\"_0\":\"salePrice - the open state of the tokensale\"}},\"getRevenuePartner()\":{\"returns\":{\"partner\":\"- the address of the partner. will receive x%% of the revenue\",\"permill\":\"- permilliage of the revenue to be split. permill = 1 / 1000000\"}},\"getSalePrice()\":{\"returns\":{\"_0\":\"salePrice - the open state of the tokensale\"}},\"getSaleToken()\":{\"returns\":{\"token\":\"- the address of the sole token\"}},\"initialize(address,uint256)\":{\"details\":\"called after constructor once to init stuff\"},\"isController(address)\":{\"details\":\"Check if this address is a controller\"},\"mint(address,uint256)\":{\"params\":{\"receiver\":\"- the address of the account receiving the item\",\"tokenHash\":\"- token hash to mint to the receiver\"}},\"minterList()\":{\"returns\":{\"_list\":\"- total list of purchasers\"}},\"purchase(address,uint256)\":{\"params\":{\"quantity\":\"- the quantity to purchase. max 5.\",\"receiver\":\"- the address of the account receiving the item\"}},\"purchaserList()\":{\"returns\":{\"_list\":\"- total list of purchasers\"}},\"relinquishControl()\":{\"details\":\"Remove the sender address from the list of controllers\"},\"salePrice(uint256)\":{\"params\":{\"quantity\":\"- the quantity to purchase. max 5.\"},\"returns\":{\"price\":\"- the sale price for the given quantity\"}},\"setOpenState(bool)\":{\"params\":{\"openState\":\"- the open state of the tokensale\"}},\"setPayee(address)\":{\"params\":{\"_payee\":\"- the open state of the tokensale\"}},\"setRevenuePartner(address,uint256)\":{\"params\":{\"partner\":\"- the address of the partner. will receive x%% of the revenue\",\"permill\":\"- permilliage of the revenue to be split. min 0 max 1000000\"}},\"setSalePrice(uint256)\":{\"params\":{\"_salePrice\":\"- the open state of the tokensale\"}}},\"version\":1},\"userdoc\":{\"kind\":\"user\",\"methods\":{\"constructor\":{\"notice\":\"Called to purchase some quantity of a token\"},\"getOpenState()\":{\"notice\":\"get the token sale open state\"},\"getPayee()\":{\"notice\":\"get the token sale price\"},\"getRevenuePartner()\":{\"notice\":\"get the revenue partner on this tokensale. we split revenue with the partner\"},\"getSalePrice()\":{\"notice\":\"get the token sale price\"},\"getSaleToken()\":{\"notice\":\"get the address of the sole token\"},\"mint(address,uint256)\":{\"notice\":\"Mint a specific tokenhash to a specific address ( up to har-cap limit) only for controller of token\"},\"minterList()\":{\"notice\":\"get the total list of minters\"},\"purchase(address,uint256)\":{\"notice\":\"Called to purchase some quantity of a token\"},\"purchaserList()\":{\"notice\":\"get the total list of purchasers\"},\"salePrice(uint256)\":{\"notice\":\"returns the sale price in ETH for the given quantity.\"},\"setOpenState(bool)\":{\"notice\":\"open / close the tokensale only for controller of token\"},\"setPayee(address)\":{\"notice\":\"set the psale price only for controller of token\"},\"setRevenuePartner(address,uint256)\":{\"notice\":\"set the revenue partner on this tokensale. we split revenue with the partner only for controller of token\"},\"setSalePrice(uint256)\":{\"notice\":\"set the psale price only for controller of token\"}},\"notice\":\"tokensale implementation\",\"version\":1}},\"settings\":{\"compilationTarget\":{\"src/TokenSale.sol\":\"TokenSale\"},\"evmVersion\":\"istanbul\",\"libraries\":{},\"metadata\":{\"bytecodeHash\":\"ipfs\",\"useLiteralContent\":true},\"optimizer\":{\"enabled\":true,\"runs\":2222},\"remappings\":[]},\"sources\":{\"@openzeppelin/contracts/interfaces/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\nimport \\\"../utils/introspection/IERC165.sol\\\";\\n\",\"keccak256\":\"0x2f27682302bd27f76399273e73cedecd2de098aa101401a3b5f2196f520da6c5\",\"license\":\"MIT\"},\"@openzeppelin/contracts/proxy/utils/Initializable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev This is a base contract to aid in writing upgradeable contracts, or any kind of contract that will be deployed\\n * behind a proxy. Since a proxied contract can't have a constructor, it's common to move constructor logic to an\\n * external initializer function, usually called `initialize`. It then becomes necessary to protect this initializer\\n * function so it can only be called once. The {initializer} modifier provided by this contract will have this effect.\\n *\\n * TIP: To avoid leaving the proxy in an uninitialized state, the initializer function should be called as early as\\n * possible by providing the encoded function call as the `_data` argument to {ERC1967Proxy-constructor}.\\n *\\n * CAUTION: When used with inheritance, manual care must be taken to not invoke a parent initializer twice, or to ensure\\n * that all initializers are idempotent. This is not verified automatically as constructors are by Solidity.\\n */\\nabstract contract Initializable {\\n    /**\\n     * @dev Indicates that the contract has been initialized.\\n     */\\n    bool private _initialized;\\n\\n    /**\\n     * @dev Indicates that the contract is in the process of being initialized.\\n     */\\n    bool private _initializing;\\n\\n    /**\\n     * @dev Modifier to protect an initializer function from being invoked twice.\\n     */\\n    modifier initializer() {\\n        require(_initializing || !_initialized, \\\"Initializable: contract is already initialized\\\");\\n\\n        bool isTopLevelCall = !_initializing;\\n        if (isTopLevelCall) {\\n            _initializing = true;\\n            _initialized = true;\\n        }\\n\\n        _;\\n\\n        if (isTopLevelCall) {\\n            _initializing = false;\\n        }\\n    }\\n}\\n\",\"keccak256\":\"0x8b2abd85d0ece7e866e100e9d47ca9cbec93c87cf71a8d267b2b93eb81f7d5e9\",\"license\":\"MIT\"},\"@openzeppelin/contracts/utils/introspection/IERC165.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity ^0.8.0;\\n\\n/**\\n * @dev Interface of the ERC165 standard, as defined in the\\n * https://eips.ethereum.org/EIPS/eip-165[EIP].\\n *\\n * Implementers can declare support of contract interfaces, which can then be\\n * queried by others ({ERC165Checker}).\\n *\\n * For an implementation, see {ERC165}.\\n */\\ninterface IERC165 {\\n    /**\\n     * @dev Returns true if this contract implements the interface defined by\\n     * `interfaceId`. See the corresponding\\n     * https://eips.ethereum.org/EIPS/eip-165#how-interfaces-are-identified[EIP section]\\n     * to learn more about how these ids are created.\\n     *\\n     * This function call must use less than 30 000 gas.\\n     */\\n    function supportsInterface(bytes4 interfaceId) external view returns (bool);\\n}\\n\",\"keccak256\":\"0xa28007762d9da9db878dd421960c8cb9a10471f47ab5c1b3309bfe48e9e79ff4\",\"license\":\"MIT\"},\"src/Controllable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\n\\npragma solidity >=0.8.0;\\n\\nimport \\\"./IControllable.sol\\\";\\n\\nabstract contract Controllable is IControllable {\\n    mapping(address => bool) internal _controllers;\\n\\n    /**\\n     * @dev Throws if called by any account not in authorized list\\n     */\\n    modifier onlyController() {\\n        require(\\n            _controllers[msg.sender] == true || address(this) == msg.sender,\\n            \\\"Controllable: caller is not a controller\\\"\\n        );\\n        _;\\n    }\\n\\n    /**\\n     * @dev Add an address allowed to control this contract\\n     */\\n    function _addController(address _controller) internal {\\n        _controllers[_controller] = true;\\n    }\\n\\n    /**\\n     * @dev Add an address allowed to control this contract\\n     */\\n    function addController(address _controller)\\n        external\\n        override\\n        onlyController\\n    {\\n        _controllers[_controller] = true;\\n    }\\n\\n    /**\\n     * @dev Check if this address is a controller\\n     */\\n    function isController(address _address)\\n        external\\n        view\\n        override\\n        returns (bool allowed)\\n    {\\n        allowed = _controllers[_address];\\n    }\\n\\n    /**\\n     * @dev Remove the sender address from the list of controllers\\n     */\\n    function relinquishControl() external override onlyController {\\n        delete _controllers[msg.sender];\\n    }\\n}\\n\",\"keccak256\":\"0x1bd0028722202b3a3237398f66f01cdcf4d067f5e42fb34060508ec558558201\",\"license\":\"MIT\"},\"src/IControllable.sol\":{\"content\":\"// SPDX-License-Identifier: MIT\\npragma solidity >=0.8.0;\\n\\ninterface IControllable {\\n    \\n    event ControllerAdded(\\n        address indexed contractAddress,\\n        address indexed controllerAddress\\n    );\\n\\n    event ControllerRemoved(\\n        address indexed contractAddress,\\n        address indexed controllerAddress\\n    );\\n\\n    function addController(address controller) external;\\n\\n    function isController(address controller) external view returns (bool);\\n\\n    function relinquishControl() external;\\n}\\n\",\"keccak256\":\"0x961dc5f72ca9f87cb1ebe78472983f62c3684dd705b4e079ebad68b46123e361\",\"license\":\"MIT\"},\"src/ITokenSale.sol\":{\"content\":\"//SPDX-License-Identifier: Unlicense\\npragma solidity ^0.8.0;\\n\\n///\\n/// @dev Interface for the NFT Royalty Standard\\n///\\ninterface ITokenSale {\\n\\n    /// @notice Called to purchase some quantity of a token\\n    /// @param receiver - the address of the account receiving the item\\n    /// @param quantity - the quantity to purchase. max 5.\\n    function purchase(address receiver, uint256 quantity) external payable returns (TokenMinting[] memory mintings);\\n\\n    /// @notice returns the sale price in ETH for the given quantity.\\n    /// @param quantity - the quantity to purchase. max 5.\\n    /// @return price - the sale price for the given quantity\\n    function salePrice(uint256 quantity) external view returns (uint256 price);\\n\\n    /// @notice Mint a specific tokenhash to a specific address ( up to har-cap limit)\\n    /// only for controller of token\\n    /// @param receiver - the address of the account receiving the item\\n    /// @param tokenHash - token hash to mint to the receiver\\n    function mint(address receiver, uint256 tokenHash) external;\\n\\n    /// @notice set the revenue partner on this tokensale. we split revenue with the partner\\n    /// only for controller of token\\n    /// @param partner - the address of the partner. will receive x%% of the revenue\\n    /// @param permill - permilliage of the revenue to be split. min 0 max 1000000\\n    function setRevenuePartner(address partner, uint256 permill) external;\\n\\n    /// @notice get the revenue partner on this tokensale. we split revenue with the partner\\n    /// @return partner - the address of the partner. will receive x%% of the revenue\\n    /// @return permill - permilliage of the revenue to be split. permill = 1 / 1000000\\n    function getRevenuePartner() external view returns (address , uint256);\\n\\n    /// @notice open / close the tokensale\\n    /// only for controller of token\\n    /// @param openState - the open state of the tokensale\\n    function setOpenState(bool openState) external;\\n\\n    /// @notice get the token sale open state\\n    /// @return openState - the open state of the tokensale\\n    function getOpenState() external view returns (bool);\\n\\n    /// @notice set the psale price\\n    /// only for controller of token\\n    /// @param _salePrice - the open state of the tokensale\\n    function setSalePrice(uint256 _salePrice) external;\\n\\n    /// @notice get the token sale price\\n    /// @return salePrice - the open state of the tokensale\\n    function getSalePrice() external view returns(uint256);\\n\\n\\n    /// @notice get the address of the sole token\\n    /// @return token - the address of the sole token\\n    function getSaleToken() external view returns(address);\\n\\n    /// @notice get the primary token sale payee\\n    /// @return payee_ the token sale payee\\n    function getPayee() external view returns (address payee_);\\n\\n    /// @notice set the primary token sale payee\\n    /// @param _payee - the token sale payee\\n    function setPayee(address _payee) external;\\n\\n    /// @notice return the mintee list\\n    /// @return _list the token sale payee\\n    function minterList() external view returns (TokenMinting[] memory _list);\\n\\n    /// @notice return the purchaser list\\n    /// @return _list the token sale payee\\n    function purchaserList() external view returns (TokenMinting[] memory _list);\\n\\n    struct TokenMinting {\\n        address recipient;\\n        uint256 tokenHash;\\n    }\\n\\n    event PayeeChanged(address indexed receiver);\\n    event RevenuePartnerChanged(address indexed partner, uint256 permill);\\n    event TokenMinted(address indexed receiver, uint256 tokenHash, uint256 mintType);\\n}\\n\\ninterface IMintable {\\n    function mint(address receiver, uint256 tokenHash) external;\\n    function getMinter() external view returns (address);\\n}\\n\\n\",\"keccak256\":\"0xcfa2717516fd0ce4e02c00f54632c0730e46fadd69e608ff60ffa3754489e75e\",\"license\":\"Unlicense\"},\"src/TokenSale.sol\":{\"content\":\"//SPDX-License-Identifier: Unlicense\\npragma solidity ^0.8.0;\\n\\nimport \\\"@openzeppelin/contracts/interfaces/IERC165.sol\\\";\\nimport \\\"@openzeppelin/contracts/proxy/utils/Initializable.sol\\\";\\nimport \\\"./Controllable.sol\\\";\\nimport \\\"./ITokenSale.sol\\\";\\n\\n/// tokensale implementation\\ncontract TokenSale is ITokenSale, Controllable, Initializable {\\n\\n    address private payee;\\n    address private soldToken;\\n    uint256 private salePrice_;\\n    uint256 private issueCount;\\n    uint256 private maxCount;\\n    uint256 private vipReserve;\\n    uint256 private vipIssued;\\n\\n    TokenMinting[] private _purchasers;\\n    TokenMinting[] private _mintees;\\n\\n    address private _partner;\\n    uint256 private _permill;\\n\\n    bool private _openState;\\n\\n    /// @notice Called to purchase some quantity of a token\\n    /// @param _soldToken - the erc721 address\\n    /// @param _salePrice - the sale price\\n    /// @param _maxCount - the max quantity\\n    /// @param _vipReserve - the vip reserve to set aside for minting directly\\n    constructor(address _soldToken, uint256 _salePrice, uint256 _maxCount, uint256 _vipReserve) {\\n\\n        _addController(msg.sender);\\n        payee = msg.sender;\\n        soldToken = _soldToken;\\n        salePrice_ = _salePrice;\\n        issueCount = 0;\\n        maxCount = _maxCount;\\n        vipReserve = _vipReserve;\\n        vipIssued = 0;\\n    }\\n\\n    /// @dev called after constructor once to init stuff\\n    function initialize(address partner, uint256 permill) public initializer {\\n        require(IMintable(soldToken).getMinter() == address(this), \\\"soldToken must be controllable by this contract\\\");\\n        _partner = partner;\\n        _permill = permill;\\n    }\\n\\n    /// @dev create a token hash using the address of this objcet, sender address and the current issue count\\n    function _createTokenHash() internal view returns (uint256) {\\n        return uint256(keccak256(abi.encodePacked(address(this), msg.sender, issueCount)));\\n    }\\n\\n    /// @notice Called to purchase some quantity of a token\\n    /// @param receiver - the address of the account receiving the item\\n    /// @param quantity - the quantity to purchase. max 5.\\n    function purchase(address receiver, uint256 quantity) external payable override returns (TokenMinting[] memory mintings) {\\n        require(issueCount + quantity + vipReserve <= maxCount, \\\"cannot purchase more than maxCount\\\");\\n        require(salePrice_ * quantity <= msg.value, \\\"must attach funds to purchase items\\\");\\n        require(quantity > 0 && quantity <= 5, \\\"cannot purchase more than 5 items\\\");\\n        require(_openState, \\\"cannot mint when tokensale is closed\\\");\\n\\n        // mint the desired tokens to the receiver\\n        mintings = new TokenMinting[](quantity);\\n        for(uint256 i = 0; i < quantity; i++) {\\n            TokenMinting memory _minting = TokenMinting(receiver, _createTokenHash());\\n            // create a record of this new minting\\n            _purchasers.push(_minting);\\n            // and get a refence to it\\n            mintings[i] = _minting;\\n            issueCount = issueCount + 1;\\n            // mint the token\\n            IMintable(soldToken).mint(receiver, _minting.tokenHash);\\n            // emit an event to that respect\\n            emit TokenMinted(receiver, _minting.tokenHash, 0);\\n        }\\n\\n        uint256 partnerShare = 0;\\n        // transfer to partner share\\n        if(_partner != address(0) && _permill > 0) {\\n            partnerShare = msg.value * _permill / 1000000;\\n            payable(_partner).transfer(partnerShare);\\n        }\\n        uint256 ourShare = msg.value - partnerShare;\\n        payable(payee).transfer(ourShare);\\n    }\\n\\n    /// @notice returns the sale price in ETH for the given quantity.\\n    /// @param quantity - the quantity to purchase. max 5.\\n    /// @return price - the sale price for the given quantity\\n    function salePrice(uint256 quantity) external view override returns (uint256 price) {\\n        price = salePrice_ * quantity;\\n    }\\n\\n    /// @notice Mint a specific tokenhash to a specific address ( up to har-cap limit)\\n    /// only for controller of token\\n    /// @param receiver - the address of the account receiving the item\\n    /// @param tokenHash - token hash to mint to the receiver\\n    function mint(address receiver, uint256 tokenHash) external override onlyController {\\n        require(vipIssued < vipReserve, \\\"cannot mint more than the reserve\\\");\\n        require(issueCount < maxCount, \\\"cannot mint more than maxCount\\\");\\n        vipIssued = vipIssued + 1;\\n        issueCount = issueCount + 1;\\n        _mintees.push(TokenMinting(receiver, _createTokenHash()));\\n        IMintable(soldToken).mint(receiver, tokenHash);\\n        // emit an event to that respect\\n        emit TokenMinted(receiver, tokenHash, 1);\\n    }\\n\\n    /// @notice set the revenue partner on this tokensale. we split revenue with the partner\\n    /// only for controller of token\\n    /// @param partner - the address of the partner. will receive x%% of the revenue\\n    /// @param permill - permilliage of the revenue to be split. min 0 max 1000000\\n    function setRevenuePartner(address partner, uint256 permill) external override onlyController {\\n        require(permill >= 0 && permill <= 1000000, \\\"permill must be between 0 and 1000000\\\");\\n        _partner = partner;\\n        _permill = permill;\\n        emit RevenuePartnerChanged(partner, permill);\\n    }\\n\\n    /// @notice get the revenue partner on this tokensale. we split revenue with the partner\\n    /// @return partner - the address of the partner. will receive x%% of the revenue\\n    /// @return permill - permilliage of the revenue to be split. permill = 1 / 1000000\\n    function getRevenuePartner() external view override returns (address partner, uint256 permill) {\\n        return (_partner, _permill);\\n    }\\n\\n    /// @notice open / close the tokensale\\n    /// only for controller of token\\n    /// @param openState - the open state of the tokensale\\n    function setOpenState(bool openState) external override onlyController {\\n        _openState = openState;\\n    }\\n\\n    /// @notice get the token sale open state\\n    /// @return openState - the open state of the tokensale\\n    function getOpenState() external view override returns (bool openState) {\\n        openState = _openState;\\n    }\\n\\n    /// @notice set the psale price\\n    /// only for controller of token\\n    /// @param _salePrice - the open state of the tokensale\\n    function setSalePrice(uint256 _salePrice) external override onlyController {\\n        require(salePrice_ > 0, \\\"salePrice must be greater than 0\\\");\\n        salePrice_ = _salePrice;\\n    }\\n\\n    /// @notice get the token sale price\\n    /// @return salePrice - the open state of the tokensale\\n    function getSalePrice() external view  override returns (uint256) {\\n        return salePrice_;\\n    }\\n\\n    /// @notice set the psale price\\n    /// only for controller of token\\n    /// @param _payee - the open state of the tokensale\\n    function setPayee(address _payee) external override onlyController {\\n        require(_payee != address(0), \\\"payee cannoot be zero address\\\");\\n        payee = _payee;\\n        emit PayeeChanged(payee);\\n    }\\n\\n    /// @notice get the token sale price\\n    /// @return salePrice - the open state of the tokensale\\n    function getPayee() external view  override returns (address) {\\n        return payee;\\n    }\\n\\n    /// @notice get the address of the sole token\\n    /// @return token - the address of the sole token\\n    function getSaleToken() external view override returns (address token) {\\n        return soldToken;\\n    }\\n\\n    /// @notice get the total list of purchasers\\n    /// @return _list - total list of purchasers\\n    function purchaserList() external view override returns (TokenMinting[] memory _list) {\\n        _list = _purchasers;\\n    }\\n\\n    /// @notice get the total list of minters\\n    /// @return _list - total list of purchasers\\n    function minterList() external view override returns (TokenMinting[] memory _list) {\\n        _list = _mintees;\\n    }\\n}\\n\",\"keccak256\":\"0x6ddffd7ae02ee9ad4341cfe99bc51d663a5c8f416423b1c39393d77ae599669c\",\"license\":\"Unlicense\"}},\"version\":1}",
+  "bytecode": "0x608060405234801561001057600080fd5b5060405161179d38038061179d83398101604081905261002f916100b2565b610057336001600160a01b03166000908152602081905260409020805460ff19166001179055565b6001805462010000600160b01b031916336201000002179055600280546001600160a01b0319166001600160a01b039590951694909417909355600391909155600060048190556005919091556006919091556007556100fb565b600080600080608085870312156100c7578384fd5b84516001600160a01b03811681146100dd578485fd5b60208601516040870151606090970151919890975090945092505050565b6116938061010a6000396000f3fe6080604052600436106101295760003560e01c8063a7fc7a07116100a5578063e1c28bef11610074578063ec3dd11611610059578063ec3dd1161461034f578063edf85f511461036d578063f36c616f1461038d57600080fd5b8063e1c28bef146102f7578063e8a010631461030c57600080fd5b8063a7fc7a0714610246578063b429afeb14610266578063cd4467351461029f578063cd6dc687146102d757600080fd5b8063410459ad116100fc5780634daf4c42116100e15780634daf4c42146101ef5780635a4c84451461020f5780638de932221461023357600080fd5b8063410459ad146101ba57806341f08b52146101da57600080fd5b80631317b5871461012e5780631919fed7146101595780632fbc0bf11461017b57806340c10f191461019a575b600080fd5b34801561013a57600080fd5b506101436103ad565b604051610150919061154e565b60405180910390f35b34801561016557600080fd5b50610179610174366004611536565b610422565b005b34801561018757600080fd5b506003545b604051908152602001610150565b3480156101a657600080fd5b506101796101b53660046114eb565b6104fd565b3480156101c657600080fd5b506101796101d53660046114ac565b6107f1565b3480156101e657600080fd5b50610143610935565b3480156101fb57600080fd5b5061017961020a3660046114eb565b6109a0565b34801561021b57600080fd5b50600c5460ff165b6040519015158152602001610150565b6101436102413660046114eb565b610af8565b34801561025257600080fd5b506101796102613660046114ac565b61108d565b34801561027257600080fd5b506102236102813660046114ac565b6001600160a01b031660009081526020819052604090205460ff1690565b3480156102ab57600080fd5b506001546201000090046001600160a01b03165b6040516001600160a01b039091168152602001610150565b3480156102e357600080fd5b506101796102f23660046114eb565b611130565b34801561030357600080fd5b5061017961136c565b34801561031857600080fd5b50610330600a54600b546001600160a01b0390911691565b604080516001600160a01b039093168352602083019190915201610150565b34801561035b57600080fd5b506002546001600160a01b03166102bf565b34801561037957600080fd5b5061018c610388366004611536565b611404565b34801561039957600080fd5b506101796103a8366004611516565b61141a565b60606008805480602002602001604051908101604052809291908181526020016000905b82821015610419576000848152602090819020604080518082019091526002850290910180546001600160a01b031682526001908101548284015290835290920191016103d1565b50505050905090565b3360009081526020819052604090205460ff1615156001148061044457503033145b6104a65760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b60648201526084015b60405180910390fd5b6000600354116104f85760405162461bcd60e51b815260206004820181905260248201527f73616c655072696365206d7573742062652067726561746572207468616e2030604482015260640161049d565b600355565b3360009081526020819052604090205460ff1615156001148061051f57503033145b61057c5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b600654600754106105f55760405162461bcd60e51b815260206004820152602160248201527f63616e6e6f74206d696e74206d6f7265207468616e207468652072657365727660448201527f6500000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600554600454106106485760405162461bcd60e51b815260206004820152601e60248201527f63616e6e6f74206d696e74206d6f7265207468616e206d6178436f756e740000604482015260640161049d565b6007546106569060016115a6565b6007556004546106679060016115a6565b60048190555060096040518060400160405280846001600160a01b031681526020016106e26004546040516bffffffffffffffffffffffff1930606090811b8216602084015233901b16603482015260488101919091526000906068016040516020818303038152906040528051906020012060001c905090565b9052815460018082018455600093845260209384902083516002938402909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b039283161781559390940151920191909155546040517f40c10f190000000000000000000000000000000000000000000000000000000081528483166004820152602481018490529116906340c10f1990604401600060405180830381600087803b15801561079057600080fd5b505af11580156107a4573d6000803e3d6000fd5b505060408051848152600160208201526001600160a01b03861693507f96234cb3d6c373a1aaa06497a540bc166d4b0359243a088eaf95e21d7253d0be9250015b60405180910390a25050565b3360009081526020819052604090205460ff1615156001148061081357503033145b6108705760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b6001600160a01b0381166108c65760405162461bcd60e51b815260206004820152601d60248201527f70617965652063616e6e6f6f74206265207a65726f2061646472657373000000604482015260640161049d565b600180547fffffffffffffffffffff0000000000000000000000000000000000000000ffff16620100006001600160a01b0384811682029290921792839055604051920416907f2053f52cc4bae36f993510e31596b2873fbb03ad574710ee044429b73ceb9aff90600090a250565b606060098054806020026020016040519081016040528092919081815260200160009082821015610419576000848152602090819020604080518082019091526002850290910180546001600160a01b031682526001908101548284015290835290920191016103d1565b3360009081526020819052604090205460ff161515600114806109c257503033145b610a1f5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b620f4240811115610a985760405162461bcd60e51b815260206004820152602560248201527f7065726d696c6c206d757374206265206265747765656e203020616e6420313060448201527f3030303030000000000000000000000000000000000000000000000000000000606482015260840161049d565b600a805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b038416908117909155600b8290556040518281527f4e9b09441471ab29764768f4e2f064608fd401c79096bb4132e0e27a64b8ea87906020016107e5565b606060055460065483600454610b0e91906115a6565b610b1891906115a6565b1115610b8c5760405162461bcd60e51b815260206004820152602260248201527f63616e6e6f74207075726368617365206d6f7265207468616e206d6178436f7560448201527f6e74000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b3482600354610b9b91906115de565b1115610c0f5760405162461bcd60e51b815260206004820152602360248201527f6d757374206174746163682066756e647320746f20707572636861736520697460448201527f656d730000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600082118015610c20575060058211155b610c925760405162461bcd60e51b815260206004820152602160248201527f63616e6e6f74207075726368617365206d6f7265207468616e2035206974656d60448201527f7300000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600c5460ff16610d095760405162461bcd60e51b8152602060048201526024808201527f63616e6e6f74206d696e74207768656e20746f6b656e73616c6520697320636c60448201527f6f73656400000000000000000000000000000000000000000000000000000000606482015260840161049d565b8167ffffffffffffffff811115610d3057634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610d7557816020015b6040805180820190915260008082526020820152815260200190600190039081610d4e5790505b50905060005b82811015610fb95760006040518060400160405280866001600160a01b03168152602001610df86004546040516bffffffffffffffffffffffff1930606090811b8216602084015233901b16603482015260488101919091526000906068016040516020818303038152906040528051906020012060001c905090565b90526008805460018101825560009190915281517ff3f7a9fe364faab93b216da50a3214154f22a0a2b415b23a84c8169e8b636ee36002909202918201805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0390921691909117905560208201517ff3f7a9fe364faab93b216da50a3214154f22a0a2b415b23a84c8169e8b636ee49091015583519091508190849084908110610eb057634e487b7160e01b600052603260045260246000fd5b60200260200101819052506004546001610eca91906115a6565b600490815560025460208301516040517f40c10f190000000000000000000000000000000000000000000000000000000081526001600160a01b038981169482019490945260248101919091529116906340c10f1990604401600060405180830381600087803b158015610f3d57600080fd5b505af1158015610f51573d6000803e3d6000fd5b50505050846001600160a01b03167f96234cb3d6c373a1aaa06497a540bc166d4b0359243a088eaf95e21d7253d0be82602001516000604051610f9e929190918252602082015260400190565b60405180910390a25080610fb181611614565b915050610d7b565b50600a546000906001600160a01b031615801590610fd957506000600b54115b1561103757620f4240600b5434610ff091906115de565b610ffa91906115be565b600a546040519192506001600160a01b03169082156108fc029083906000818181858888f19350505050158015611035573d6000803e3d6000fd5b505b600061104382346115fd565b6001546040519192506201000090046001600160a01b0316906108fc8315029083906000818181858888f19350505050158015611084573d6000803e3d6000fd5b50505092915050565b3360009081526020819052604090205460ff161515600114806110af57503033145b61110c5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b6001600160a01b03166000908152602081905260409020805460ff19166001179055565b600154610100900460ff1680611149575060015460ff16155b6111bb5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a6564000000000000000000000000000000000000606482015260840161049d565b600154610100900460ff161580156111fa57600180547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000166101011790555b600254604080517ff3667517000000000000000000000000000000000000000000000000000000008152905130926001600160a01b03169163f3667517916004808301926020929190829003018186803b15801561125757600080fd5b505afa15801561126b573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061128f91906114cf565b6001600160a01b03161461130b5760405162461bcd60e51b815260206004820152602f60248201527f736f6c64546f6b656e206d75737420626520636f6e74726f6c6c61626c65206260448201527f79207468697320636f6e74726163740000000000000000000000000000000000606482015260840161049d565b600a805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b038516179055600b829055801561136757600180547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff1690555b505050565b3360009081526020819052604090205460ff1615156001148061138e57503033145b6113eb5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b336000908152602081905260409020805460ff19169055565b60008160035461141491906115de565b92915050565b3360009081526020819052604090205460ff1615156001148061143c57503033145b6114995760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b600c805460ff1916911515919091179055565b6000602082840312156114bd578081fd5b81356114c881611645565b9392505050565b6000602082840312156114e0578081fd5b81516114c881611645565b600080604083850312156114fd578081fd5b823561150881611645565b946020939093013593505050565b600060208284031215611527578081fd5b813580151581146114c8578182fd5b600060208284031215611547578081fd5b5035919050565b602080825282518282018190526000919060409081850190868401855b8281101561159957815180516001600160a01b0316855286015186850152928401929085019060010161156b565b5091979650505050505050565b600082198211156115b9576115b961162f565b500190565b6000826115d957634e487b7160e01b81526012600452602481fd5b500490565b60008160001904831182151516156115f8576115f861162f565b500290565b60008282101561160f5761160f61162f565b500390565b60006000198214156116285761162861162f565b5060010190565b634e487b7160e01b600052601160045260246000fd5b6001600160a01b038116811461165a57600080fd5b5056fea26469706673582212205c91a65ab8a179449c87f8c7b962734fc05ce3faee2be34202001de50b530d8e64736f6c63430008040033",
+  "deployedBytecode": "0x6080604052600436106101295760003560e01c8063a7fc7a07116100a5578063e1c28bef11610074578063ec3dd11611610059578063ec3dd1161461034f578063edf85f511461036d578063f36c616f1461038d57600080fd5b8063e1c28bef146102f7578063e8a010631461030c57600080fd5b8063a7fc7a0714610246578063b429afeb14610266578063cd4467351461029f578063cd6dc687146102d757600080fd5b8063410459ad116100fc5780634daf4c42116100e15780634daf4c42146101ef5780635a4c84451461020f5780638de932221461023357600080fd5b8063410459ad146101ba57806341f08b52146101da57600080fd5b80631317b5871461012e5780631919fed7146101595780632fbc0bf11461017b57806340c10f191461019a575b600080fd5b34801561013a57600080fd5b506101436103ad565b604051610150919061154e565b60405180910390f35b34801561016557600080fd5b50610179610174366004611536565b610422565b005b34801561018757600080fd5b506003545b604051908152602001610150565b3480156101a657600080fd5b506101796101b53660046114eb565b6104fd565b3480156101c657600080fd5b506101796101d53660046114ac565b6107f1565b3480156101e657600080fd5b50610143610935565b3480156101fb57600080fd5b5061017961020a3660046114eb565b6109a0565b34801561021b57600080fd5b50600c5460ff165b6040519015158152602001610150565b6101436102413660046114eb565b610af8565b34801561025257600080fd5b506101796102613660046114ac565b61108d565b34801561027257600080fd5b506102236102813660046114ac565b6001600160a01b031660009081526020819052604090205460ff1690565b3480156102ab57600080fd5b506001546201000090046001600160a01b03165b6040516001600160a01b039091168152602001610150565b3480156102e357600080fd5b506101796102f23660046114eb565b611130565b34801561030357600080fd5b5061017961136c565b34801561031857600080fd5b50610330600a54600b546001600160a01b0390911691565b604080516001600160a01b039093168352602083019190915201610150565b34801561035b57600080fd5b506002546001600160a01b03166102bf565b34801561037957600080fd5b5061018c610388366004611536565b611404565b34801561039957600080fd5b506101796103a8366004611516565b61141a565b60606008805480602002602001604051908101604052809291908181526020016000905b82821015610419576000848152602090819020604080518082019091526002850290910180546001600160a01b031682526001908101548284015290835290920191016103d1565b50505050905090565b3360009081526020819052604090205460ff1615156001148061044457503033145b6104a65760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b60648201526084015b60405180910390fd5b6000600354116104f85760405162461bcd60e51b815260206004820181905260248201527f73616c655072696365206d7573742062652067726561746572207468616e2030604482015260640161049d565b600355565b3360009081526020819052604090205460ff1615156001148061051f57503033145b61057c5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b600654600754106105f55760405162461bcd60e51b815260206004820152602160248201527f63616e6e6f74206d696e74206d6f7265207468616e207468652072657365727660448201527f6500000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600554600454106106485760405162461bcd60e51b815260206004820152601e60248201527f63616e6e6f74206d696e74206d6f7265207468616e206d6178436f756e740000604482015260640161049d565b6007546106569060016115a6565b6007556004546106679060016115a6565b60048190555060096040518060400160405280846001600160a01b031681526020016106e26004546040516bffffffffffffffffffffffff1930606090811b8216602084015233901b16603482015260488101919091526000906068016040516020818303038152906040528051906020012060001c905090565b9052815460018082018455600093845260209384902083516002938402909101805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b039283161781559390940151920191909155546040517f40c10f190000000000000000000000000000000000000000000000000000000081528483166004820152602481018490529116906340c10f1990604401600060405180830381600087803b15801561079057600080fd5b505af11580156107a4573d6000803e3d6000fd5b505060408051848152600160208201526001600160a01b03861693507f96234cb3d6c373a1aaa06497a540bc166d4b0359243a088eaf95e21d7253d0be9250015b60405180910390a25050565b3360009081526020819052604090205460ff1615156001148061081357503033145b6108705760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b6001600160a01b0381166108c65760405162461bcd60e51b815260206004820152601d60248201527f70617965652063616e6e6f6f74206265207a65726f2061646472657373000000604482015260640161049d565b600180547fffffffffffffffffffff0000000000000000000000000000000000000000ffff16620100006001600160a01b0384811682029290921792839055604051920416907f2053f52cc4bae36f993510e31596b2873fbb03ad574710ee044429b73ceb9aff90600090a250565b606060098054806020026020016040519081016040528092919081815260200160009082821015610419576000848152602090819020604080518082019091526002850290910180546001600160a01b031682526001908101548284015290835290920191016103d1565b3360009081526020819052604090205460ff161515600114806109c257503033145b610a1f5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b620f4240811115610a985760405162461bcd60e51b815260206004820152602560248201527f7065726d696c6c206d757374206265206265747765656e203020616e6420313060448201527f3030303030000000000000000000000000000000000000000000000000000000606482015260840161049d565b600a805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b038416908117909155600b8290556040518281527f4e9b09441471ab29764768f4e2f064608fd401c79096bb4132e0e27a64b8ea87906020016107e5565b606060055460065483600454610b0e91906115a6565b610b1891906115a6565b1115610b8c5760405162461bcd60e51b815260206004820152602260248201527f63616e6e6f74207075726368617365206d6f7265207468616e206d6178436f7560448201527f6e74000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b3482600354610b9b91906115de565b1115610c0f5760405162461bcd60e51b815260206004820152602360248201527f6d757374206174746163682066756e647320746f20707572636861736520697460448201527f656d730000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600082118015610c20575060058211155b610c925760405162461bcd60e51b815260206004820152602160248201527f63616e6e6f74207075726368617365206d6f7265207468616e2035206974656d60448201527f7300000000000000000000000000000000000000000000000000000000000000606482015260840161049d565b600c5460ff16610d095760405162461bcd60e51b8152602060048201526024808201527f63616e6e6f74206d696e74207768656e20746f6b656e73616c6520697320636c60448201527f6f73656400000000000000000000000000000000000000000000000000000000606482015260840161049d565b8167ffffffffffffffff811115610d3057634e487b7160e01b600052604160045260246000fd5b604051908082528060200260200182016040528015610d7557816020015b6040805180820190915260008082526020820152815260200190600190039081610d4e5790505b50905060005b82811015610fb95760006040518060400160405280866001600160a01b03168152602001610df86004546040516bffffffffffffffffffffffff1930606090811b8216602084015233901b16603482015260488101919091526000906068016040516020818303038152906040528051906020012060001c905090565b90526008805460018101825560009190915281517ff3f7a9fe364faab93b216da50a3214154f22a0a2b415b23a84c8169e8b636ee36002909202918201805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b0390921691909117905560208201517ff3f7a9fe364faab93b216da50a3214154f22a0a2b415b23a84c8169e8b636ee49091015583519091508190849084908110610eb057634e487b7160e01b600052603260045260246000fd5b60200260200101819052506004546001610eca91906115a6565b600490815560025460208301516040517f40c10f190000000000000000000000000000000000000000000000000000000081526001600160a01b038981169482019490945260248101919091529116906340c10f1990604401600060405180830381600087803b158015610f3d57600080fd5b505af1158015610f51573d6000803e3d6000fd5b50505050846001600160a01b03167f96234cb3d6c373a1aaa06497a540bc166d4b0359243a088eaf95e21d7253d0be82602001516000604051610f9e929190918252602082015260400190565b60405180910390a25080610fb181611614565b915050610d7b565b50600a546000906001600160a01b031615801590610fd957506000600b54115b1561103757620f4240600b5434610ff091906115de565b610ffa91906115be565b600a546040519192506001600160a01b03169082156108fc029083906000818181858888f19350505050158015611035573d6000803e3d6000fd5b505b600061104382346115fd565b6001546040519192506201000090046001600160a01b0316906108fc8315029083906000818181858888f19350505050158015611084573d6000803e3d6000fd5b50505092915050565b3360009081526020819052604090205460ff161515600114806110af57503033145b61110c5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b6001600160a01b03166000908152602081905260409020805460ff19166001179055565b600154610100900460ff1680611149575060015460ff16155b6111bb5760405162461bcd60e51b815260206004820152602e60248201527f496e697469616c697a61626c653a20636f6e747261637420697320616c72656160448201527f647920696e697469616c697a6564000000000000000000000000000000000000606482015260840161049d565b600154610100900460ff161580156111fa57600180547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff0000166101011790555b600254604080517ff3667517000000000000000000000000000000000000000000000000000000008152905130926001600160a01b03169163f3667517916004808301926020929190829003018186803b15801561125757600080fd5b505afa15801561126b573d6000803e3d6000fd5b505050506040513d601f19601f8201168201806040525081019061128f91906114cf565b6001600160a01b03161461130b5760405162461bcd60e51b815260206004820152602f60248201527f736f6c64546f6b656e206d75737420626520636f6e74726f6c6c61626c65206260448201527f79207468697320636f6e74726163740000000000000000000000000000000000606482015260840161049d565b600a805473ffffffffffffffffffffffffffffffffffffffff19166001600160a01b038516179055600b829055801561136757600180547fffffffffffffffffffffffffffffffffffffffffffffffffffffffffffff00ff1690555b505050565b3360009081526020819052604090205460ff1615156001148061138e57503033145b6113eb5760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b336000908152602081905260409020805460ff19169055565b60008160035461141491906115de565b92915050565b3360009081526020819052604090205460ff1615156001148061143c57503033145b6114995760405162461bcd60e51b815260206004820152602860248201527f436f6e74726f6c6c61626c653a2063616c6c6572206973206e6f74206120636f604482015267373a3937b63632b960c11b606482015260840161049d565b600c805460ff1916911515919091179055565b6000602082840312156114bd578081fd5b81356114c881611645565b9392505050565b6000602082840312156114e0578081fd5b81516114c881611645565b600080604083850312156114fd578081fd5b823561150881611645565b946020939093013593505050565b600060208284031215611527578081fd5b813580151581146114c8578182fd5b600060208284031215611547578081fd5b5035919050565b602080825282518282018190526000919060409081850190868401855b8281101561159957815180516001600160a01b0316855286015186850152928401929085019060010161156b565b5091979650505050505050565b600082198211156115b9576115b961162f565b500190565b6000826115d957634e487b7160e01b81526012600452602481fd5b500490565b60008160001904831182151516156115f8576115f861162f565b500290565b60008282101561160f5761160f61162f565b500390565b60006000198214156116285761162861162f565b5060010190565b634e487b7160e01b600052601160045260246000fd5b6001600160a01b038116811461165a57600080fd5b5056fea26469706673582212205c91a65ab8a179449c87f8c7b962734fc05ce3faee2be34202001de50b530d8e64736f6c63430008040033",
+  "devdoc": {
+    "kind": "dev",
+    "methods": {
+      "addController(address)": {
+        "details": "Add an address allowed to control this contract"
+      },
+      "constructor": {
+        "params": {
+          "_maxCount": "- the max quantity",
+          "_salePrice": "- the sale price",
+          "_soldToken": "- the erc721 address",
+          "_vipReserve": "- the vip reserve to set aside for minting directly"
+        }
+      },
+      "getOpenState()": {
+        "returns": {
+          "openState": "- the open state of the tokensale"
+        }
+      },
+      "getPayee()": {
+        "returns": {
+          "_0": "salePrice - the open state of the tokensale"
+        }
+      },
+      "getRevenuePartner()": {
+        "returns": {
+          "partner": "- the address of the partner. will receive x%% of the revenue",
+          "permill": "- permilliage of the revenue to be split. permill = 1 / 1000000"
+        }
+      },
+      "getSalePrice()": {
+        "returns": {
+          "_0": "salePrice - the open state of the tokensale"
+        }
+      },
+      "getSaleToken()": {
+        "returns": {
+          "token": "- the address of the sole token"
+        }
+      },
+      "initialize(address,uint256)": {
+        "details": "called after constructor once to init stuff"
+      },
+      "isController(address)": {
+        "details": "Check if this address is a controller"
+      },
+      "mint(address,uint256)": {
+        "params": {
+          "receiver": "- the address of the account receiving the item",
+          "tokenHash": "- token hash to mint to the receiver"
+        }
+      },
+      "minterList()": {
+        "returns": {
+          "_list": "- total list of purchasers"
+        }
+      },
+      "purchase(address,uint256)": {
+        "params": {
+          "quantity": "- the quantity to purchase. max 5.",
+          "receiver": "- the address of the account receiving the item"
+        }
+      },
+      "purchaserList()": {
+        "returns": {
+          "_list": "- total list of purchasers"
+        }
+      },
+      "relinquishControl()": {
+        "details": "Remove the sender address from the list of controllers"
+      },
+      "salePrice(uint256)": {
+        "params": {
+          "quantity": "- the quantity to purchase. max 5."
+        },
+        "returns": {
+          "price": "- the sale price for the given quantity"
+        }
+      },
+      "setOpenState(bool)": {
+        "params": {
+          "openState": "- the open state of the tokensale"
+        }
+      },
+      "setPayee(address)": {
+        "params": {
+          "_payee": "- the open state of the tokensale"
+        }
+      },
+      "setRevenuePartner(address,uint256)": {
+        "params": {
+          "partner": "- the address of the partner. will receive x%% of the revenue",
+          "permill": "- permilliage of the revenue to be split. min 0 max 1000000"
+        }
+      },
+      "setSalePrice(uint256)": {
+        "params": {
+          "_salePrice": "- the open state of the tokensale"
+        }
+      }
+    },
+    "version": 1
+  },
+  "userdoc": {
+    "kind": "user",
+    "methods": {
+      "constructor": {
+        "notice": "Called to purchase some quantity of a token"
+      },
+      "getOpenState()": {
+        "notice": "get the token sale open state"
+      },
+      "getPayee()": {
+        "notice": "get the token sale price"
+      },
+      "getRevenuePartner()": {
+        "notice": "get the revenue partner on this tokensale. we split revenue with the partner"
+      },
+      "getSalePrice()": {
+        "notice": "get the token sale price"
+      },
+      "getSaleToken()": {
+        "notice": "get the address of the sole token"
+      },
+      "mint(address,uint256)": {
+        "notice": "Mint a specific tokenhash to a specific address ( up to har-cap limit) only for controller of token"
+      },
+      "minterList()": {
+        "notice": "get the total list of minters"
+      },
+      "purchase(address,uint256)": {
+        "notice": "Called to purchase some quantity of a token"
+      },
+      "purchaserList()": {
+        "notice": "get the total list of purchasers"
+      },
+      "salePrice(uint256)": {
+        "notice": "returns the sale price in ETH for the given quantity."
+      },
+      "setOpenState(bool)": {
+        "notice": "open / close the tokensale only for controller of token"
+      },
+      "setPayee(address)": {
+        "notice": "set the psale price only for controller of token"
+      },
+      "setRevenuePartner(address,uint256)": {
+        "notice": "set the revenue partner on this tokensale. we split revenue with the partner only for controller of token"
+      },
+      "setSalePrice(uint256)": {
+        "notice": "set the psale price only for controller of token"
+      }
+    },
+    "notice": "tokensale implementation",
+    "version": 1
+  },
+  "storageLayout": {
+    "storage": [
+      {
+        "astId": 2846,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_controllers",
+        "offset": 0,
+        "slot": "0",
+        "type": "t_mapping(t_address,t_bool)"
+      },
+      {
+        "astId": 115,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_initialized",
+        "offset": 0,
+        "slot": "1",
+        "type": "t_bool"
+      },
+      {
+        "astId": 118,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_initializing",
+        "offset": 1,
+        "slot": "1",
+        "type": "t_bool"
+      },
+      {
+        "astId": 3517,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "payee",
+        "offset": 2,
+        "slot": "1",
+        "type": "t_address"
+      },
+      {
+        "astId": 3519,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "soldToken",
+        "offset": 0,
+        "slot": "2",
+        "type": "t_address"
+      },
+      {
+        "astId": 3521,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "salePrice_",
+        "offset": 0,
+        "slot": "3",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3523,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "issueCount",
+        "offset": 0,
+        "slot": "4",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3525,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "maxCount",
+        "offset": 0,
+        "slot": "5",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3527,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "vipReserve",
+        "offset": 0,
+        "slot": "6",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3529,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "vipIssued",
+        "offset": 0,
+        "slot": "7",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3533,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_purchasers",
+        "offset": 0,
+        "slot": "8",
+        "type": "t_array(t_struct(TokenMinting)3319_storage)dyn_storage"
+      },
+      {
+        "astId": 3537,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_mintees",
+        "offset": 0,
+        "slot": "9",
+        "type": "t_array(t_struct(TokenMinting)3319_storage)dyn_storage"
+      },
+      {
+        "astId": 3539,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_partner",
+        "offset": 0,
+        "slot": "10",
+        "type": "t_address"
+      },
+      {
+        "astId": 3541,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_permill",
+        "offset": 0,
+        "slot": "11",
+        "type": "t_uint256"
+      },
+      {
+        "astId": 3543,
+        "contract": "src/TokenSale.sol:TokenSale",
+        "label": "_openState",
+        "offset": 0,
+        "slot": "12",
+        "type": "t_bool"
+      }
+    ],
+    "types": {
+      "t_address": {
+        "encoding": "inplace",
+        "label": "address",
+        "numberOfBytes": "20"
+      },
+      "t_array(t_struct(TokenMinting)3319_storage)dyn_storage": {
+        "base": "t_struct(TokenMinting)3319_storage",
+        "encoding": "dynamic_array",
+        "label": "struct ITokenSale.TokenMinting[]",
+        "numberOfBytes": "32"
+      },
+      "t_bool": {
+        "encoding": "inplace",
+        "label": "bool",
+        "numberOfBytes": "1"
+      },
+      "t_mapping(t_address,t_bool)": {
+        "encoding": "mapping",
+        "key": "t_address",
+        "label": "mapping(address => bool)",
+        "numberOfBytes": "32",
+        "value": "t_bool"
+      },
+      "t_struct(TokenMinting)3319_storage": {
+        "encoding": "inplace",
+        "label": "struct ITokenSale.TokenMinting",
+        "members": [
+          {
+            "astId": 3316,
+            "contract": "src/TokenSale.sol:TokenSale",
+            "label": "recipient",
+            "offset": 0,
+            "slot": "0",
+            "type": "t_address"
+          },
+          {
+            "astId": 3318,
+            "contract": "src/TokenSale.sol:TokenSale",
+            "label": "tokenHash",
+            "offset": 0,
+            "slot": "1",
+            "type": "t_uint256"
+          }
+        ],
+        "numberOfBytes": "64"
+      },
+      "t_uint256": {
+        "encoding": "inplace",
+        "label": "uint256",
+        "numberOfBytes": "32"
+      }
+    }
+  }
+}

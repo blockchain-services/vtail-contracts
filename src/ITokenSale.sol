@@ -79,6 +79,7 @@ interface ITokenSale {
 
     event PayeeChanged(address indexed receiver);
     event RevenuePartnerChanged(address indexed partner, uint256 permill);
+    event TokenMinted(address indexed receiver, uint256 tokenHash, uint256 mintType);
 }
 
 interface IMintable {

@@ -64,26 +64,31 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         require(_openState, "cannot mint when tokensale is closed");
 
         // mint the desired tokens to the receiver
-        mintings = new TokenMinting[](quantity);
+        //mintings = new TokenMinting[](quantity);
         for(uint256 i = 0; i < quantity; i++) {
-            TokenMinting memory _minting = TokenMinting(receiver, _createTokenHash());
-            // create a record of this new minting
-            _purchasers.push(_minting);
+            // TokenMinting memory _minting = TokenMinting(receiver, _createTokenHash());
+            // // create a record of this new minting
+            // _purchasers.push(_minting);
             // and get a refence to it
-            mintings[i] = _minting;
+            // mintings[i] = _minting;
             issueCount = issueCount + 1;
+
             // mint the token
-            IMintable(soldToken).mint(receiver, _minting.tokenHash);
+            uint256 tokenHash = _createTokenHash();
+            IMintable(soldToken).mint(receiver, tokenHash);
+
+            // emit an event to that respect
+            emit TokenMinted(receiver, tokenHash, 0);
         }
 
-        uint256 partnerShare = 0;
-        // transfer to partner share
-        if(_partner != address(0) && _permill > 0) {
-            partnerShare = msg.value * _permill / 1000000;
-            payable(_partner).transfer(partnerShare);
-        }
-        uint256 ourShare = msg.value - partnerShare;
-        payable(payee).transfer(ourShare);
+        // uint256 partnerShare = 0;
+        // // transfer to partner share
+        // if(_partner != address(0) && _permill > 0) {
+        //     partnerShare = msg.value * _permill / 1000000;
+        //     payable(_partner).transfer(partnerShare);
+        // }
+        // uint256 ourShare = msg.value - partnerShare;
+        // payable(payee).transfer(ourShare);
     }
 
     /// @notice returns the sale price in ETH for the given quantity.
@@ -104,6 +109,8 @@ contract TokenSale is ITokenSale, Controllable, Initializable {
         issueCount = issueCount + 1;
         _mintees.push(TokenMinting(receiver, _createTokenHash()));
         IMintable(soldToken).mint(receiver, tokenHash);
+        // emit an event to that respect
+        emit TokenMinted(receiver, tokenHash, 1);
     }
 
     /// @notice set the revenue partner on this tokensale. we split revenue with the partner

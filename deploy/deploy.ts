@@ -24,9 +24,7 @@ export default async function func(hre: any) {
       "Scary Devils",
       "DEVILS",
       10000,
-      "https://scarydevils.nft/",
-      ownerAddress,
-      '0x1202503C0c7beE4f608db883Cf1a4B0A6E65a11f'
+      "http://demonft.vtail.com/wp-json/api/token/"
     ]
   };
   const VtailERC721 = await deploy(
